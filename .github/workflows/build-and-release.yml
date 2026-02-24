@@ -1,0 +1,48 @@
+name: Build & Release ConnectIQ App
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/v}"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Using version $VERSION"
+
+      - name: Update manifest.xml version
+        run: |
+          sed -i '' "s/version=\"[^\"]*\"/version=\"$VERSION\"/" manifest.xml
+
+      - name: Install Connect IQ SDK
+        run: brew install --cask connectiq
+
+      - name: Restore Garmin developer key
+        run: |
+          echo "$GARMIN_DEVELOPER_KEY" | base64 --decode > developer_key.der
+        env:
+          GARMIN_DEVELOPER_KEY: ${{ secrets.GARMIN_DEVELOPER_KEY }}
+
+      - name: Build IQ file
+        run: |
+          mkdir -p bin
+          monkeyc -f monkey.jungle \
+            -o bin/Stronglifts5x5.iq \
+            -y developer_key.der
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: bin/Stronglifts5x5.iq
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
