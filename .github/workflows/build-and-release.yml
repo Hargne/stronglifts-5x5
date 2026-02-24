@@ -35,12 +35,14 @@ jobs:
         env:
           GARMIN_DEVELOPER_KEY: ${{ secrets.GARMIN_DEVELOPER_KEY }}
 
-      - name: Build IQ file
+      - name: Build IQ package (store)
         run: |
           mkdir -p bin
-          monkeyc -f monkey.jungle \
+          monkeyc \
+            -f monkey.jungle \
             -o bin/Stronglifts5x5.iq \
-            -y developer_key.der
+            -y developer_key.der \
+            --package-app
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
