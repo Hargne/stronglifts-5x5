@@ -9,8 +9,6 @@
         minApiLevel="3.2.0">
         <iq:products>
             <iq:product id="fr245" />
-            <iq:product id="fr57042mm" />
-            <iq:product id="fr57047mm" />
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="Fit" />
