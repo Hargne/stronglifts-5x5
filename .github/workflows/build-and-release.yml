@@ -3,6 +3,7 @@ name: Build & Release ConnectIQ App
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -30,14 +31,16 @@ jobs:
       - name: Install Connect IQ SDK
         run: brew install --cask connectiq
 
-      - name: Set CIQ_SDK_HOME
-        run: echo "CIQ_SDK_HOME=/Applications/Garmin/ConnectIQ" >> $GITHUB_ENV
-
       - name: Restore Garmin developer key
         run: |
           echo "$GARMIN_DEVELOPER_KEY" | base64 --decode > developer_key.der
         env:
           GARMIN_DEVELOPER_KEY: ${{ secrets.GARMIN_DEVELOPER_KEY }}
+      - name: Debug monkeyc
+        run: |
+          which monkeyc
+          monkeyc --version
+          monkeyc -d ?
 
       - name: Build IQ package
         run: |
