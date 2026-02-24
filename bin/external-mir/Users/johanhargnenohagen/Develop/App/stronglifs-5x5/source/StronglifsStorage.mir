@@ -1,0 +1,308 @@
+[ @file = "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [Application,1,13,24]; ]
+using Toybox.Application;
+[ @file = "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [Lang,2,13,17]; @symbol_usingAlias = [Lang,2,21,25]; ]
+using Toybox.Lang as :Lang;
+[ @file = "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc"; @line = 4; @symbol_moduledef = [StronglifsStorage,4,7,24]; ]
+module StronglifsStorage {
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc"; @line = 4; ]
+    <init> {
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc"; @line = 5; @position = 10; @symbol_constdef = [PROFILE_KEY,5,10,21]; ]
+    const PROFILE_KEY = "stronglifs_5x5_profile_v1";
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc"; @line = 7; @symbol_functiondef = [_defaultWeights,7,13,28]; ]
+    function _defaultWeights() {
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_7_31_15_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 8 8 ]
+        %tmp.1 = newd 5;
+        %tmp.2 = "Squat";
+        %tmp.3 = 20.0;
+        %tmp.4 = dup %tmp.1;
+        %tmp.5 = aputv %tmp.4 %tmp.2 %tmp.3;
+        %tmp.6 = "Bench Press";
+        %tmp.7 = 20.0;
+        %tmp.8 = dup %tmp.5;
+        %tmp.9 = aputv %tmp.8 %tmp.6 %tmp.7;
+        %tmp.10 = "Barbell Row";
+        %tmp.11 = 20.0;
+        %tmp.12 = dup %tmp.9;
+        %tmp.13 = aputv %tmp.12 %tmp.10 %tmp.11;
+        %tmp.14 = "Overhead Press";
+        %tmp.15 = 20.0;
+        %tmp.16 = dup %tmp.13;
+        %tmp.17 = aputv %tmp.16 %tmp.14 %tmp.15;
+        %tmp.18 = "Deadlift";
+        %tmp.19 = 40.0;
+        %tmp.20 = dup %tmp.17;
+        %tmp.21 = aputv %tmp.20 %tmp.18 %tmp.19;
+        ret %tmp.21;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_7_31_15_4_stop:
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc"; @line = 17; @symbol_functiondef = [defaultProfile,17,13,27]; ]
+    function defaultProfile() {
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_17_30_22_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 18 8 ]
+        %tmp.1 = newd 2;
+        %tmp.3 = const :lastWorkout;
+        symbol [ lastWorkout %tmp.3 19 13 24 const ];
+        %tmp.4 = null;
+        %tmp.5 = dup %tmp.1;
+        %tmp.6 = aputv %tmp.5 %tmp.3 %tmp.4;
+        %tmp.8 = const :weights;
+        symbol [ weights %tmp.8 20 13 20 const ];
+        %tmp.9 = self;
+        symbol [ _defaultWeights %tmp.10 20 24 39 ];
+        %tmp.10 = getv function %tmp.9 :_defaultWeights;
+        %tmp.11 = invoke %tmp.9 %tmp.10();
+        %tmp.12 = dup %tmp.6;
+        %tmp.13 = aputv %tmp.12 %tmp.8 %tmp.11;
+        ret %tmp.13;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_17_30_22_4_stop:
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc"; @line = 24; @symbol_functiondef = [loadProfile,24,13,24]; ]
+    function loadProfile() {
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_24_27_53_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 25 8 ]
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_24_27_53_4_start" "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_24_27_53_4_stop" ]
+        %profile.1 = local;
+        symbol [ profile %profile.1 25 12 19 ];
+        %tmp.1 = self;
+        symbol [ defaultProfile %tmp.2 25 22 36 ];
+        %tmp.2 = getv function %tmp.1 :defaultProfile;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %profile.1 %tmp.3;
+        symbol [ profile %profile.1 25 12 19 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 26 8 ]
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_24_27_53_4_start" "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_24_27_53_4_stop" ]
+        %saved.2 = local;
+        symbol [ saved %saved.2 26 12 17 ];
+        symbol [ Application %tmp.4 26 20 31 ];
+        %tmp.4 = getm $.Toybox.Application;
+        symbol [ Storage %tmp.5 26 32 39 ];
+        %tmp.5 = getv %tmp.4 :Storage;
+        symbol [ getValue %tmp.6 26 40 48 ];
+        %tmp.6 = getv function %tmp.5 :getValue;
+        symbol [ PROFILE_KEY %tmp.8 26 49 60 ];
+        %tmp.8 = getv ? :PROFILE_KEY;
+        %tmp.9 = invoke %tmp.5 %tmp.6(%tmp.8);
+        lputv %saved.2 %tmp.9;
+        symbol [ saved %saved.2 26 12 17 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 28 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_28_8_30_8_if_stmt:
+        %tmp.10 = lgetv %saved.2;
+        symbol [ saved %tmp.10 28 14 19 ];
+        symbol [ Lang %tmp.11 28 31 35 ];
+        %tmp.11 = getm $.Toybox.Lang;
+        symbol [ Dictionary %tmp.12 28 36 46 ];
+        %tmp.12 = getv %tmp.11 :Dictionary;
+        %tmp.13 = isa %tmp.10 %tmp.12;
+        %tmp.14 = not %tmp.13;
+        bf %tmp.14 @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_28_8_30_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_28_8_30_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_28_49_30_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 29 12 ]
+        %tmp.15 = lgetv %profile.1;
+        symbol [ profile %tmp.15 29 19 26 ];
+        ret %tmp.15;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_28_49_30_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_28_8_30_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_28_8_30_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 32 8 ]
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_24_27_53_4_start" "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_24_27_53_4_stop" ]
+        %savedProfile.3 = local;
+        symbol [ savedProfile %savedProfile.3 32 12 24 ];
+        %tmp.16 = lgetv %saved.2;
+        symbol [ saved %tmp.16 32 27 32 ];
+        %tmp.17 = as %tmp.16 Lang.Dictionary;
+        symbol [ Lang %tmp.17 32 36 40 ];
+        symbol [ Dictionary %tmp.17 32 41 51 ];
+        lputv %savedProfile.3 %tmp.17;
+        symbol [ savedProfile %savedProfile.3 32 12 24 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 34 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_34_8_36_8_if_stmt:
+        %tmp.18 = lgetv %savedProfile.3;
+        symbol [ savedProfile %tmp.18 34 12 24 ];
+        %tmp.20 = const :lastWorkout;
+        symbol [ lastWorkout %tmp.20 34 26 37 const ];
+        %tmp.21 = agetv %tmp.18 %tmp.20;
+        %tmp.22 = null;
+        %tmp.23 = ne %tmp.21 %tmp.22;
+        bf %tmp.23 @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_34_8_36_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_34_8_36_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_34_48_36_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 35 12 ]
+        %tmp.24 = lgetv %profile.1;
+        symbol [ profile %tmp.24 35 12 19 ];
+        %tmp.25 = lgetv %savedProfile.3;
+        symbol [ savedProfile %tmp.25 35 36 48 ];
+        %tmp.27 = const :lastWorkout;
+        symbol [ lastWorkout %tmp.27 35 50 61 const ];
+        %tmp.28 = agetv %tmp.25 %tmp.27;
+        %tmp.30 = const :lastWorkout;
+        symbol [ lastWorkout %tmp.30 35 21 32 const ];
+        aputv %tmp.24 %tmp.30 %tmp.28;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_34_48_36_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_34_8_36_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_34_8_36_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 38 8 ]
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_24_27_53_4_start" "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_24_27_53_4_stop" ]
+        %savedWeights.4 = local;
+        symbol [ savedWeights %savedWeights.4 38 12 24 ];
+        %tmp.31 = lgetv %savedProfile.3;
+        symbol [ savedProfile %tmp.31 38 27 39 ];
+        %tmp.33 = const :weights;
+        symbol [ weights %tmp.33 38 41 48 const ];
+        %tmp.34 = agetv %tmp.31 %tmp.33;
+        lputv %savedWeights.4 %tmp.34;
+        symbol [ savedWeights %savedWeights.4 38 12 24 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 39 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_8_50_8_if_stmt:
+        %tmp.35 = lgetv %savedWeights.4;
+        symbol [ savedWeights %tmp.35 39 12 24 ];
+        symbol [ Lang %tmp.36 39 36 40 ];
+        %tmp.36 = getm $.Toybox.Lang;
+        symbol [ Dictionary %tmp.37 39 41 51 ];
+        %tmp.37 = getv %tmp.36 :Dictionary;
+        %tmp.38 = isa %tmp.35 %tmp.37;
+        bf %tmp.38 @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_8_50_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_8_50_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_53_50_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 40 12 ]
+        %tmp.39 = lgetv %savedWeights.4;
+        symbol [ savedWeights %tmp.39 40 27 39 ];
+        %tmp.40 = as %tmp.39 { (Lang.Dictionary) };
+        %tmp.41 = as %tmp.40 Lang.Dictionary;
+        symbol [ Lang %tmp.41 40 43 47 ];
+        symbol [ Dictionary %tmp.41 40 48 58 ];
+        lputv %savedWeights.4 %tmp.41;
+        symbol [ savedWeights %savedWeights.4 40 12 24 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 41 12 ]
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_53_50_8_start" "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_53_50_8_stop" ]
+        %merged.5 = local;
+        symbol [ merged %merged.5 41 16 22 ];
+        %tmp.42 = self;
+        symbol [ _defaultWeights %tmp.43 41 25 40 ];
+        %tmp.43 = getv function %tmp.42 :_defaultWeights;
+        %tmp.44 = invoke %tmp.42 %tmp.43();
+        lputv %merged.5 %tmp.44;
+        symbol [ merged %merged.5 41 16 22 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 42 12 ]
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_53_50_8_start" "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_53_50_8_stop" ]
+        %exerciseNames.6 = local;
+        symbol [ exerciseNames %exerciseNames.6 42 16 29 ];
+        %tmp.45 = lgetv %merged.5;
+        symbol [ merged %tmp.45 42 32 38 ];
+        symbol [ keys %tmp.46 42 39 43 ];
+        %tmp.46 = getv function %tmp.45 :keys;
+        %tmp.47 = invoke %tmp.45 %tmp.46();
+        lputv %exerciseNames.6 %tmp.47;
+        symbol [ exerciseNames %exerciseNames.6 42 16 29 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 43 12 ]
+        for @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_test @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_incr @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_end;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_init:
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_begin" "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_end" ]
+        %i.7 = local;
+        symbol [ i %i.7 43 21 22 ];
+        %tmp.48 = 0;
+        lputv %i.7 %tmp.48;
+        symbol [ i %i.7 43 21 22 ];
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_test:
+        %tmp.49 = lgetv %i.7;
+        symbol [ i %tmp.49 43 28 29 ];
+        %tmp.50 = lgetv %exerciseNames.6;
+        symbol [ exerciseNames %tmp.50 43 32 45 ];
+        symbol [ size %tmp.51 43 46 50 ];
+        %tmp.51 = getv function %tmp.50 :size;
+        %tmp.52 = invoke %tmp.50 %tmp.51();
+        %tmp.53 = lt %tmp.49 %tmp.52;
+        bf %tmp.53 @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_end;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_begin:
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_62_48_12_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 44 16 ]
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_62_48_12_start" "_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_62_48_12_stop" ]
+        %exerciseName.8 = local;
+        symbol [ exerciseName %exerciseName.8 44 20 32 ];
+        %tmp.54 = lgetv %exerciseNames.6;
+        symbol [ exerciseNames %tmp.54 44 35 48 ];
+        %tmp.55 = lgetv %i.7;
+        symbol [ i %tmp.55 44 49 50 ];
+        %tmp.56 = agetv %tmp.54 %tmp.55;
+        lputv %exerciseName.8 %tmp.56;
+        symbol [ exerciseName %exerciseName.8 44 20 32 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 45 16 ]
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_45_16_47_16_if_stmt:
+        %tmp.57 = lgetv %savedWeights.4;
+        symbol [ savedWeights %tmp.57 45 20 32 ];
+        %tmp.58 = lgetv %exerciseName.8;
+        symbol [ exerciseName %tmp.58 45 33 45 ];
+        %tmp.59 = agetv %tmp.57 %tmp.58;
+        %tmp.60 = null;
+        %tmp.61 = ne %tmp.59 %tmp.60;
+        bf %tmp.61 @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_45_16_47_16_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_45_16_47_16_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_45_56_47_16_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 46 20 ]
+        %tmp.62 = lgetv %merged.5;
+        symbol [ merged %tmp.62 46 20 26 ];
+        %tmp.63 = lgetv %savedWeights.4;
+        symbol [ savedWeights %tmp.63 46 43 55 ];
+        %tmp.64 = lgetv %exerciseName.8;
+        symbol [ exerciseName %tmp.64 46 56 68 ];
+        %tmp.65 = agetv %tmp.63 %tmp.64;
+        symbol [ toFloat %tmp.66 46 70 77 ];
+        %tmp.66 = getv function %tmp.65 :toFloat;
+        %tmp.67 = invoke %tmp.65 %tmp.66();
+        %tmp.68 = lgetv %exerciseName.8;
+        symbol [ exerciseName %tmp.68 46 27 39 ];
+        aputv %tmp.62 %tmp.68 %tmp.67;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_45_56_47_16_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_45_16_47_16_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_45_16_47_16_if_end:
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_62_48_12_stop:
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_incr:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 43 ]
+        %tmp.69 = lgetv %i.7;
+        symbol [ i %tmp.69 43 54 55 ];
+        %tmp.70 = 1;
+        %tmp.71 = add %tmp.69 %tmp.70;
+        lputv %i.7 %tmp.71;
+        symbol [ i %i.7 43 54 55 ];
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_test;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_43_12_48_12_for_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 49 12 ]
+        %tmp.72 = lgetv %profile.1;
+        symbol [ profile %tmp.72 49 12 19 ];
+        %tmp.73 = lgetv %merged.5;
+        symbol [ merged %tmp.73 49 32 38 ];
+        %tmp.75 = const :weights;
+        symbol [ weights %tmp.75 49 21 28 const ];
+        aputv %tmp.72 %tmp.75 %tmp.73;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_53_50_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_8_50_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_39_8_50_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 52 8 ]
+        %tmp.76 = lgetv %profile.1;
+        symbol [ profile %tmp.76 52 15 22 ];
+        ret %tmp.76;
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_24_27_53_4_stop:
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc"; @line = 55; @symbol_functiondef = [saveProfile,55,13,24]; @symbol_param<0> = [profile,55,25,32]; ]
+    function saveProfile(profile) {
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_55_34_57_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc" 56 8 ]
+        symbol [ Application %tmp.1 56 8 19 ];
+        %tmp.1 = getm $.Toybox.Application;
+        symbol [ Storage %tmp.2 56 20 27 ];
+        %tmp.2 = getv %tmp.1 :Storage;
+        symbol [ setValue %tmp.3 56 28 36 ];
+        %tmp.3 = getv function %tmp.2 :setValue;
+        symbol [ PROFILE_KEY %tmp.5 56 37 48 ];
+        %tmp.5 = getv ? :PROFILE_KEY;
+        %tmp.6 = lgetv %profile;
+        symbol [ profile %tmp.6 56 50 57 ];
+        invoke %tmp.2 %tmp.3(%tmp.5, %tmp.6);
+_Users_johanhargnenohagen_Develop_App_stronglifs_5x5_source_StronglifsStorage_mc_55_34_57_4_stop:
+    }
+}
+[ @file = "/Users/johanhargnenohagen/Develop/App/stronglifs-5x5/source/StronglifsStorage.mc"; @line = 1; ]
+<init> {
+}

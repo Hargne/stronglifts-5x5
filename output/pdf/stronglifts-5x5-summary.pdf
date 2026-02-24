@@ -1,0 +1,215 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 3435 >>
+stream
+BT
+/F2 14 Tf
+1 0 0 1 46 748 Tm
+(Stronglifts 5x5 App - Repo Summary) Tj
+ET
+BT
+/F2 11 Tf
+1 0 0 1 46 724 Tm
+(WHAT IT IS) Tj
+ET
+BT
+/F1 10 Tf
+1 0 0 1 46 710 Tm
+(A Garmin Connect IQ watch app named "Stronglifts 5x5" for Forerunner 245 that guides strength) Tj
+ET
+BT
+/F1 10 Tf
+1 0 0 1 46 696 Tm
+(sessions on-watch.) Tj
+ET
+BT
+/F1 10 Tf
+1 0 0 1 46 682 Tm
+(It runs a workout-state flow \(warmup/rest/work/choice/summary\) and stores lift weights between) Tj
+ET
+BT
+/F1 10 Tf
+1 0 0 1 46 668 Tm
+(sessions.) Tj
+ET
+BT
+/F2 11 Tf
+1 0 0 1 46 644 Tm
+(WHO IT'S FOR) Tj
+ET
+BT
+/F1 10 Tf
+1 0 0 1 46 630 Tm
+(Primary persona: A lifter using Stronglifts 5x5 who wants to run and log sets directly from a) Tj
+ET
+BT
+/F1 10 Tf
+1 0 0 1 46 616 Tm
+(Garmin Forerunner 245.) Tj
+ET
+BT
+/F2 11 Tf
+1 0 0 1 46 592 Tm
+(WHAT IT DOES) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 578 Tm
+(- Provides built-in Workout A and Workout B exercise plans with set counts and per-exercise) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 564 Tm
+(progression increments.) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 550 Tm
+(- Alternates workouts across sessions using last workout state.) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 536 Tm
+(- Tracks elapsed time per segment with 1-second UI refresh.) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 522 Tm
+(- Supports rest/work transitions and per-set effort choice \(Easy or Hard\).) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 508 Tm
+(- Lets users edit current lift weight during rest/work \(hold UP, +/- 2.5 kg, save with LAP\).) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 494 Tm
+(- Persists profile data \(last workout and exercise weights\) in Application.Storage.) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 480 Tm
+(- Creates and saves a strength-training ActivityRecording session with lap markers and exit) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 466 Tm
+(options.) Tj
+ET
+BT
+/F2 11 Tf
+1 0 0 1 46 442 Tm
+(HOW IT WORKS \(ARCHITECTURE\)) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 428 Tm
+(- App bootstrap: Stronglifts5x5App creates StrongliftsMainView plus StrongliftsInputDelegate.) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 414 Tm
+(- Input path: InputDelegate maps LAP/UP/DOWN/BACK and UP-hold to view handlers.) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 400 Tm
+(- Control logic: StrongliftsStateMachine owns state, timers, progression, and exit/save/discard) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 386 Tm
+(behavior.) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 372 Tm
+(- Domain logic: StrongliftsWorkoutLogic defines templates, alternation helper, and kg formatting.) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 358 Tm
+(- Persistence: StrongliftsStorage loads/saves profile key "stronglifts_5x5_profile_v1".) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 344 Tm
+(- Data flow: Key event -> state transition -> display model -> render; save path -> storage +) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 330 Tm
+(activity save.) Tj
+ET
+BT
+/F2 11 Tf
+1 0 0 1 46 306 Tm
+(HOW TO RUN \(MINIMAL\)) Tj
+ET
+BT
+/F1 10 Tf
+1 0 0 1 46 292 Tm
+(1. Build: monkeyc -f monkey.jungle -o bin/Stronglifts5x5.prg -y ~/.ciq/developer_key.der) Tj
+ET
+BT
+/F1 10 Tf
+1 0 0 1 46 278 Tm
+(2. Start simulator:) Tj
+ET
+BT
+/F1 10 Tf
+1 0 0 1 46 264 Tm
+(.../connectiq-sdk-mac-8.4.1-2026-02-03-e9f77eeaa/bin/ConnectIQ.app/.../simulator) Tj
+ET
+BT
+/F1 10 Tf
+1 0 0 1 46 250 Tm
+(3. Run: .../bin/monkeydo .../stronglifts-5x5/bin/Stronglifts5x5.prg fr245) Tj
+ET
+BT
+/F2 11 Tf
+1 0 0 1 46 226 Tm
+(NOT FOUND IN REPO) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 212 Tm
+(- Automated tests or CI setup.) Tj
+ET
+BT
+/F1 9.7 Tf
+1 0 0 1 46 198 Tm
+(- Release/distribution instructions beyond local simulator run.) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3883
+%%EOF

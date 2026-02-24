@@ -1,0 +1,474 @@
+[ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [System,1,13,19]; ]
+using Toybox.System;
+[ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [WatchUi,2,13,20]; ]
+using Toybox.WatchUi;
+[ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 4; @symbol_classdef = [StrongliftsInputDelegate,4,6,30]; @symbol_extends<0> = [WatchUi,4,39,46]; @symbol_extends<1> = [InputDelegate,4,47,60]; ]
+class StrongliftsInputDelegate extends WatchUi.InputDelegate {
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 4; ]
+    <init> {
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 4; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 5; @position = 10; @symbol_constdef = [HOLD_MS,5,10,17]; ]
+    const HOLD_MS = 700;
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 7; @position = 8; @symbol_vardef = [_view,7,8,13]; ]
+    var _view;
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 8; @position = 8; @symbol_vardef = [_upPressedAt,8,8,20]; ]
+    var _upPressedAt;
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 10; @symbol_functiondef = [initialize,10,13,23]; @symbol_param<0> = [view,10,24,28]; ]
+    function initialize(view) as Void {
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_10_30_14_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 11 8 ]
+        symbol [ InputDelegate %tmp.2 11 8 21 ];
+        %tmp.2 = getv ? :InputDelegate;
+        symbol [ initialize %tmp.3 11 22 32 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 12 8 ]
+        %tmp.4 = lgetv %view;
+        symbol [ view %tmp.4 12 16 20 ];
+        symbol [ _view ? 12 8 13 ];
+        putv self :_view %tmp.4;
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 13 8 ]
+        %tmp.5 = 0;
+        symbol [ _upPressedAt ? 13 8 20 ];
+        putv self :_upPressedAt %tmp.5;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_10_30_14_4_stop:
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 16; @symbol_functiondef = [onKeyPressed,16,13,25]; @symbol_param<0> = [keyEvent,16,26,34]; ]
+    function onKeyPressed(keyEvent) {
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_16_36_40_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 17 8 ]
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_16_36_40_4_start" "_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_16_36_40_4_stop" ]
+        %key.1 = local;
+        symbol [ key %key.1 17 12 15 ];
+        %tmp.1 = lgetv %keyEvent;
+        symbol [ keyEvent %tmp.1 17 18 26 ];
+        symbol [ getKey %tmp.2 17 27 33 ];
+        %tmp.2 = getv function %tmp.1 :getKey;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %key.1 %tmp.3;
+        symbol [ key %key.1 17 12 15 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 19 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_19_8_22_8_if_stmt:
+        %tmp.4 = self;
+        symbol [ _isLapKey %tmp.5 19 12 21 ];
+        %tmp.5 = getv function %tmp.4 :_isLapKey;
+        %tmp.6 = lgetv %key.1;
+        symbol [ key %tmp.6 19 22 25 ];
+        %tmp.7 = invoke %tmp.4 %tmp.5(%tmp.6);
+        bf %tmp.7 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_19_8_22_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_19_8_22_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_19_28_22_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 20 12 ]
+        symbol [ _view %tmp.9 20 12 17 ];
+        %tmp.9 = getv ? :_view;
+        symbol [ handleLapPress %tmp.10 20 18 32 ];
+        %tmp.10 = getv function %tmp.9 :handleLapPress;
+        invoke %tmp.9 %tmp.10();
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 21 12 ]
+        %tmp.11 = true;
+        ret %tmp.11;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_19_28_22_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_19_8_22_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_19_8_22_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 24 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_24_8_27_8_if_stmt:
+        %tmp.12 = self;
+        symbol [ _isDownKey %tmp.13 24 12 22 ];
+        %tmp.13 = getv function %tmp.12 :_isDownKey;
+        %tmp.14 = lgetv %key.1;
+        symbol [ key %tmp.14 24 23 26 ];
+        %tmp.15 = invoke %tmp.12 %tmp.13(%tmp.14);
+        bf %tmp.15 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_24_8_27_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_24_8_27_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_24_29_27_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 25 12 ]
+        symbol [ _view %tmp.17 25 12 17 ];
+        %tmp.17 = getv ? :_view;
+        symbol [ handleDownPress %tmp.18 25 18 33 ];
+        %tmp.18 = getv function %tmp.17 :handleDownPress;
+        invoke %tmp.17 %tmp.18();
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 26 12 ]
+        %tmp.19 = true;
+        ret %tmp.19;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_24_29_27_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_24_8_27_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_24_8_27_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 29 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_29_8_32_8_if_stmt:
+        %tmp.20 = self;
+        symbol [ _isBackKey %tmp.21 29 12 22 ];
+        %tmp.21 = getv function %tmp.20 :_isBackKey;
+        %tmp.22 = lgetv %key.1;
+        symbol [ key %tmp.22 29 23 26 ];
+        %tmp.23 = invoke %tmp.20 %tmp.21(%tmp.22);
+        bf %tmp.23 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_29_8_32_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_29_8_32_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_29_29_32_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 30 12 ]
+        symbol [ _view %tmp.25 30 12 17 ];
+        %tmp.25 = getv ? :_view;
+        symbol [ handleBackPress %tmp.26 30 18 33 ];
+        %tmp.26 = getv function %tmp.25 :handleBackPress;
+        invoke %tmp.25 %tmp.26();
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 31 12 ]
+        %tmp.27 = true;
+        ret %tmp.27;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_29_29_32_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_29_8_32_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_29_8_32_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 34 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_34_8_37_8_if_stmt:
+        %tmp.28 = self;
+        symbol [ _isUpKey %tmp.29 34 12 20 ];
+        %tmp.29 = getv function %tmp.28 :_isUpKey;
+        %tmp.30 = lgetv %key.1;
+        symbol [ key %tmp.30 34 21 24 ];
+        %tmp.31 = invoke %tmp.28 %tmp.29(%tmp.30);
+        bf %tmp.31 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_34_8_37_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_34_8_37_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_34_27_37_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 35 12 ]
+        symbol [ System %tmp.32 35 27 33 ];
+        %tmp.32 = getm $.Toybox.System;
+        symbol [ getTimer %tmp.33 35 34 42 ];
+        %tmp.33 = getv function %tmp.32 :getTimer;
+        %tmp.34 = invoke %tmp.32 %tmp.33();
+        symbol [ _upPressedAt ? 35 12 24 ];
+        putv self :_upPressedAt %tmp.34;
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 36 12 ]
+        %tmp.35 = true;
+        ret %tmp.35;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_34_27_37_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_34_8_37_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_34_8_37_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 39 8 ]
+        %tmp.36 = false;
+        ret %tmp.36;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_16_36_40_4_stop:
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 42; @symbol_functiondef = [onKeyReleased,42,13,26]; @symbol_param<0> = [keyEvent,42,27,35]; ]
+    function onKeyReleased(keyEvent) {
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_42_37_57_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 43 8 ]
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_42_37_57_4_start" "_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_42_37_57_4_stop" ]
+        %key.1 = local;
+        symbol [ key %key.1 43 12 15 ];
+        %tmp.1 = lgetv %keyEvent;
+        symbol [ keyEvent %tmp.1 43 18 26 ];
+        symbol [ getKey %tmp.2 43 27 33 ];
+        %tmp.2 = getv function %tmp.1 :getKey;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %key.1 %tmp.3;
+        symbol [ key %key.1 43 12 15 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 44 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_44_8_46_8_if_stmt:
+        %tmp.4 = self;
+        symbol [ _isBackKey %tmp.5 44 12 22 ];
+        %tmp.5 = getv function %tmp.4 :_isBackKey;
+        %tmp.6 = lgetv %key.1;
+        symbol [ key %tmp.6 44 23 26 ];
+        %tmp.7 = invoke %tmp.4 %tmp.5(%tmp.6);
+        bf %tmp.7 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_44_8_46_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_44_8_46_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_44_29_46_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 45 12 ]
+        %tmp.8 = true;
+        ret %tmp.8;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_44_29_46_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_44_8_46_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_44_8_46_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 47 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_47_8_55_8_if_stmt:
+        %tmp.9 = self;
+        symbol [ _isUpKey %tmp.10 47 12 20 ];
+        %tmp.10 = getv function %tmp.9 :_isUpKey;
+        %tmp.11 = lgetv %key.1;
+        symbol [ key %tmp.11 47 21 24 ];
+        %tmp.12 = invoke %tmp.9 %tmp.10(%tmp.11);
+        bf %tmp.12 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_47_8_55_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_47_8_55_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_47_27_55_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 48 12 ]
+        [ "_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_47_27_55_8_start" "_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_47_27_55_8_stop" ]
+        %heldFor.2 = local;
+        symbol [ heldFor %heldFor.2 48 16 23 ];
+        symbol [ System %tmp.13 48 26 32 ];
+        %tmp.13 = getm $.Toybox.System;
+        symbol [ getTimer %tmp.14 48 33 41 ];
+        %tmp.14 = getv function %tmp.13 :getTimer;
+        %tmp.15 = invoke %tmp.13 %tmp.14();
+        symbol [ _upPressedAt %tmp.17 48 46 58 ];
+        %tmp.17 = getv ? :_upPressedAt;
+        %tmp.18 = sub %tmp.15 %tmp.17;
+        lputv %heldFor.2 %tmp.18;
+        symbol [ heldFor %heldFor.2 48 16 23 ];
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 49 12 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_49_12_53_12_if_stmt:
+        %tmp.19 = lgetv %heldFor.2;
+        symbol [ heldFor %tmp.19 49 16 23 ];
+        symbol [ HOLD_MS %tmp.21 49 27 34 ];
+        %tmp.21 = getv ? :HOLD_MS;
+        %tmp.22 = gte %tmp.19 %tmp.21;
+        bf %tmp.22 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_49_12_53_12_if_else_false;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_49_12_53_12_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_49_36_51_12_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 50 16 ]
+        symbol [ _view %tmp.24 50 16 21 ];
+        %tmp.24 = getv ? :_view;
+        symbol [ handleUpHold %tmp.25 50 22 34 ];
+        %tmp.25 = getv function %tmp.24 :handleUpHold;
+        invoke %tmp.24 %tmp.25();
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_49_36_51_12_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_49_12_53_12_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_49_12_53_12_if_else_false:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_51_19_53_12_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 52 16 ]
+        symbol [ _view %tmp.27 52 16 21 ];
+        %tmp.27 = getv ? :_view;
+        symbol [ handleUpPress %tmp.28 52 22 35 ];
+        %tmp.28 = getv function %tmp.27 :handleUpPress;
+        invoke %tmp.27 %tmp.28();
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_51_19_53_12_stop:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_49_12_53_12_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 54 12 ]
+        %tmp.29 = true;
+        ret %tmp.29;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_47_27_55_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_47_8_55_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_47_8_55_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 56 8 ]
+        %tmp.30 = false;
+        ret %tmp.30;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_42_37_57_4_stop:
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 59; @symbol_functiondef = [onKey,59,13,18]; @symbol_param<0> = [keyEvent,59,19,27]; ]
+    function onKey(keyEvent) {
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_59_29_62_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 61 8 ]
+        %tmp.1 = false;
+        ret %tmp.1;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_59_29_62_4_stop:
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 64; @symbol_functiondef = [_isLapKey,64,13,22]; @symbol_param<0> = [key,64,23,26]; ]
+    function _isLapKey(key) {
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_64_28_75_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 65 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_8_67_8_if_stmt:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_12_65_61_begin:
+        symbol [ WatchUi %tmp.1 65 13 20 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        %tmp.3 = const :KEY_LAP;
+        symbol [ KEY_LAP %tmp.3 65 26 33 const ];
+        %tmp.4 = canhazplz %tmp.1 %tmp.3;
+        bf %tmp.4 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_8_67_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_38_65_61_true:
+        %tmp.5 = lgetv %key;
+        symbol [ key %tmp.5 65 39 42 ];
+        symbol [ WatchUi %tmp.6 65 46 53 ];
+        %tmp.6 = getm $.Toybox.WatchUi;
+        symbol [ KEY_LAP %tmp.7 65 54 61 ];
+        %tmp.7 = getv %tmp.6 :KEY_LAP;
+        %tmp.8 = eq %tmp.5 %tmp.7;
+        push %tmp.8;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_38_65_61_end:
+        %tmp.9 = phi [%tmp.4 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_12_65_61_begin] [%tmp.8 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_38_65_61_true] [%tmp.9 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_38_65_61_end];
+        bf %tmp.9 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_8_67_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_8_67_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_64_67_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 66 12 ]
+        %tmp.10 = true;
+        ret %tmp.10;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_64_67_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_8_67_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_65_8_67_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 68 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_8_70_8_if_stmt:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_12_68_65_begin:
+        symbol [ WatchUi %tmp.11 68 13 20 ];
+        %tmp.11 = getm $.Toybox.WatchUi;
+        %tmp.13 = const :KEY_ENTER;
+        symbol [ KEY_ENTER %tmp.13 68 26 35 const ];
+        %tmp.14 = canhazplz %tmp.11 %tmp.13;
+        bf %tmp.14 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_8_70_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_40_68_65_true:
+        %tmp.15 = lgetv %key;
+        symbol [ key %tmp.15 68 41 44 ];
+        symbol [ WatchUi %tmp.16 68 48 55 ];
+        %tmp.16 = getm $.Toybox.WatchUi;
+        symbol [ KEY_ENTER %tmp.17 68 56 65 ];
+        %tmp.17 = getv %tmp.16 :KEY_ENTER;
+        %tmp.18 = eq %tmp.15 %tmp.17;
+        push %tmp.18;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_40_68_65_end:
+        %tmp.19 = phi [%tmp.14 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_12_68_65_begin] [%tmp.18 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_40_68_65_true] [%tmp.19 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_40_68_65_end];
+        bf %tmp.19 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_8_70_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_8_70_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_68_70_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 69 12 ]
+        %tmp.20 = true;
+        ret %tmp.20;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_68_70_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_8_70_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_68_8_70_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 71 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_8_73_8_if_stmt:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_12_71_65_begin:
+        symbol [ WatchUi %tmp.21 71 13 20 ];
+        %tmp.21 = getm $.Toybox.WatchUi;
+        %tmp.23 = const :KEY_START;
+        symbol [ KEY_START %tmp.23 71 26 35 const ];
+        %tmp.24 = canhazplz %tmp.21 %tmp.23;
+        bf %tmp.24 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_8_73_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_40_71_65_true:
+        %tmp.25 = lgetv %key;
+        symbol [ key %tmp.25 71 41 44 ];
+        symbol [ WatchUi %tmp.26 71 48 55 ];
+        %tmp.26 = getm $.Toybox.WatchUi;
+        symbol [ KEY_START %tmp.27 71 56 65 ];
+        %tmp.27 = getv %tmp.26 :KEY_START;
+        %tmp.28 = eq %tmp.25 %tmp.27;
+        push %tmp.28;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_40_71_65_end:
+        %tmp.29 = phi [%tmp.24 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_12_71_65_begin] [%tmp.28 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_40_71_65_true] [%tmp.29 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_40_71_65_end];
+        bf %tmp.29 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_8_73_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_8_73_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_68_73_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 72 12 ]
+        %tmp.30 = true;
+        ret %tmp.30;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_68_73_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_8_73_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_71_8_73_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 74 8 ]
+        %tmp.31 = false;
+        ret %tmp.31;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_64_28_75_4_stop:
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 77; @symbol_functiondef = [_isUpKey,77,13,21]; @symbol_param<0> = [key,77,22,25]; ]
+    function _isUpKey(key) {
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_77_27_79_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 78 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_78_15_78_62_begin:
+        symbol [ WatchUi %tmp.1 78 16 23 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        %tmp.3 = const :KEY_UP;
+        symbol [ KEY_UP %tmp.3 78 29 35 const ];
+        %tmp.4 = canhazplz %tmp.1 %tmp.3;
+        %tmp.5 = dup %tmp.4;
+        bf %tmp.5 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_78_40_78_62_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_78_40_78_62_true:
+        %tmp.6 = lgetv %key;
+        symbol [ key %tmp.6 78 41 44 ];
+        symbol [ WatchUi %tmp.7 78 48 55 ];
+        %tmp.7 = getm $.Toybox.WatchUi;
+        symbol [ KEY_UP %tmp.8 78 56 62 ];
+        %tmp.8 = getv %tmp.7 :KEY_UP;
+        %tmp.9 = eq %tmp.6 %tmp.8;
+        %tmp.10 = and %tmp.4 %tmp.9;
+        push %tmp.10;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_78_40_78_62_end:
+        %tmp.11 = phi [%tmp.5 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_78_15_78_62_begin] [%tmp.10 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_78_40_78_62_true] [%tmp.11 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_78_40_78_62_end];
+        ret %tmp.11;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_77_27_79_4_stop:
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 81; @symbol_functiondef = [_isBackKey,81,13,23]; @symbol_param<0> = [key,81,24,27]; ]
+    function _isBackKey(key) {
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_81_29_89_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 82 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_8_84_8_if_stmt:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_12_82_61_begin:
+        symbol [ WatchUi %tmp.1 82 13 20 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        %tmp.3 = const :KEY_ESC;
+        symbol [ KEY_ESC %tmp.3 82 26 33 const ];
+        %tmp.4 = canhazplz %tmp.1 %tmp.3;
+        bf %tmp.4 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_8_84_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_38_82_61_true:
+        %tmp.5 = lgetv %key;
+        symbol [ key %tmp.5 82 39 42 ];
+        symbol [ WatchUi %tmp.6 82 46 53 ];
+        %tmp.6 = getm $.Toybox.WatchUi;
+        symbol [ KEY_ESC %tmp.7 82 54 61 ];
+        %tmp.7 = getv %tmp.6 :KEY_ESC;
+        %tmp.8 = eq %tmp.5 %tmp.7;
+        push %tmp.8;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_38_82_61_end:
+        %tmp.9 = phi [%tmp.4 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_12_82_61_begin] [%tmp.8 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_38_82_61_true] [%tmp.9 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_38_82_61_end];
+        bf %tmp.9 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_8_84_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_8_84_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_64_84_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 83 12 ]
+        %tmp.10 = true;
+        ret %tmp.10;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_64_84_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_8_84_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_82_8_84_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 85 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_8_87_8_if_stmt:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_12_85_63_begin:
+        symbol [ WatchUi %tmp.11 85 13 20 ];
+        %tmp.11 = getm $.Toybox.WatchUi;
+        %tmp.13 = const :KEY_BACK;
+        symbol [ KEY_BACK %tmp.13 85 26 34 const ];
+        %tmp.14 = canhazplz %tmp.11 %tmp.13;
+        bf %tmp.14 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_8_87_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_39_85_63_true:
+        %tmp.15 = lgetv %key;
+        symbol [ key %tmp.15 85 40 43 ];
+        symbol [ WatchUi %tmp.16 85 47 54 ];
+        %tmp.16 = getm $.Toybox.WatchUi;
+        symbol [ KEY_BACK %tmp.17 85 55 63 ];
+        %tmp.17 = getv %tmp.16 :KEY_BACK;
+        %tmp.18 = eq %tmp.15 %tmp.17;
+        push %tmp.18;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_39_85_63_end:
+        %tmp.19 = phi [%tmp.14 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_12_85_63_begin] [%tmp.18 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_39_85_63_true] [%tmp.19 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_39_85_63_end];
+        bf %tmp.19 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_8_87_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_8_87_8_if_true:
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_66_87_8_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 86 12 ]
+        %tmp.20 = true;
+        ret %tmp.20;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_66_87_8_stop:
+        goto @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_8_87_8_if_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_85_8_87_8_if_end:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 88 8 ]
+        %tmp.21 = false;
+        ret %tmp.21;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_81_29_89_4_stop:
+    }
+    [ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 91; @symbol_functiondef = [_isDownKey,91,13,23]; @symbol_param<0> = [key,91,24,27]; ]
+    function _isDownKey(key) {
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_91_29_93_4_start:
+[ "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc" 92 8 ]
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_92_15_92_66_begin:
+        symbol [ WatchUi %tmp.1 92 16 23 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        %tmp.3 = const :KEY_DOWN;
+        symbol [ KEY_DOWN %tmp.3 92 29 37 const ];
+        %tmp.4 = canhazplz %tmp.1 %tmp.3;
+        %tmp.5 = dup %tmp.4;
+        bf %tmp.5 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_92_42_92_66_end;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_92_42_92_66_true:
+        %tmp.6 = lgetv %key;
+        symbol [ key %tmp.6 92 43 46 ];
+        symbol [ WatchUi %tmp.7 92 50 57 ];
+        %tmp.7 = getm $.Toybox.WatchUi;
+        symbol [ KEY_DOWN %tmp.8 92 58 66 ];
+        %tmp.8 = getv %tmp.7 :KEY_DOWN;
+        %tmp.9 = eq %tmp.6 %tmp.8;
+        %tmp.10 = and %tmp.4 %tmp.9;
+        push %tmp.10;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_92_42_92_66_end:
+        %tmp.11 = phi [%tmp.5 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_92_15_92_66_begin] [%tmp.10 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_92_42_92_66_true] [%tmp.11 @_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_92_42_92_66_end];
+        ret %tmp.11;
+_Users_johanhargnenohagen_Develop_App_stronglifts_5x5_source_StrongliftsInputDelegate_mc_91_29_93_4_stop:
+    }
+}
+[ @file = "/Users/johanhargnenohagen/Develop/App/stronglifts-5x5/source/StrongliftsInputDelegate.mc"; @line = 1; ]
+<init> {
+}

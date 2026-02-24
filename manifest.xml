@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
+    <iq:application
+        id="6d71a1e4-f42c-4d10-a983-6ef4a04f0fac"
+        type="watch-app"
+        name="@Strings.AppName"
+        entry="Stronglifts5x5App"
+        launcherIcon="@Drawables.LauncherIcon"
+        minApiLevel="3.2.0">
+        <iq:products>
+            <iq:product id="fr245" />
+            <iq:product id="fr57042mm" />
+            <iq:product id="fr57047mm" />
+        </iq:products>
+        <iq:permissions>
+            <iq:uses-permission id="Fit" />
+        </iq:permissions>
+        <iq:languages>
+            <iq:language>eng</iq:language>
+        </iq:languages>
+    </iq:application>
+</iq:manifest>
