@@ -21,7 +21,7 @@ jobs:
 
       - name: Update manifest.xml version
         run: |
-          sed -i '' "s/version=\"[^\"]*\"/version=\"$VERSION\"/" manifest.xml
+          sed -i '' 's/\(<iq:application[^>]*version="\)[^"]*\(".*\)/\1'"$VERSION"'\2/' manifest.xml
 
       - name: Install Connect IQ SDK
         run: brew install --cask connectiq
