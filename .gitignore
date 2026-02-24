@@ -1,0 +1,47 @@
+# ----------------------
+# Build output
+# ----------------------
+bin/
+build/
+out/
+*.prg
+*.iq
+
+# ----------------------
+# Garmin / Connect IQ
+# ----------------------
+developer_key.der
+*.jungle.local
+connectiq-sdk-*/
+device_settings.json
+
+# ----------------------
+# CI artifacts
+# ----------------------
+*.log
+
+# ----------------------
+# macOS
+# ----------------------
+.DS_Store
+
+# ----------------------
+# Editor / IDE
+# ----------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ----------------------
+# Node (if you use tooling)
+# ----------------------
+node_modules/
+dist/
+coverage/
+
+# ----------------------
+# Misc
+# ----------------------
+.env
+.env.*
