@@ -12,15 +12,16 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout tag
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
 
-      - name: Extract version from tag
-        id: version
+      - name: Extract version
         run: |
-          VERSION="${GITHUB_REF#refs/tags/v}"
+          VERSION="${{ github.event.release.tag_name }}"
+          VERSION="${VERSION#v}"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "Using version $VERSION"
 
       - name: Update manifest.xml version
         run: |
@@ -29,13 +30,16 @@ jobs:
       - name: Install Connect IQ SDK
         run: brew install --cask connectiq
 
+      - name: Set CIQ_SDK_HOME
+        run: echo "CIQ_SDK_HOME=/Applications/Garmin/ConnectIQ" >> $GITHUB_ENV
+
       - name: Restore Garmin developer key
         run: |
           echo "$GARMIN_DEVELOPER_KEY" | base64 --decode > developer_key.der
         env:
           GARMIN_DEVELOPER_KEY: ${{ secrets.GARMIN_DEVELOPER_KEY }}
 
-      - name: Build IQ package (store)
+      - name: Build IQ package
         run: |
           mkdir -p bin
           monkeyc \
@@ -44,9 +48,7 @@ jobs:
             -y developer_key.der \
             --package-app
 
-      - name: Create GitHub Release
+      - name: Attach IQ to release
         uses: softprops/action-gh-release@v2
         with:
           files: bin/Stronglifts5x5.iq
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
