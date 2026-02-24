@@ -1,9 +1,8 @@
 name: Build & Release ConnectIQ App
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
+  release:
+    types: [published]
 
 jobs:
   build:
