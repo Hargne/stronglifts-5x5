@@ -4,6 +4,8 @@
 bin/
 build/
 out/
+output/
+tmp/
 *.prg
 *.iq
 
