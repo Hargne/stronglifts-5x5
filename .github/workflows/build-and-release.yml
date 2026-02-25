@@ -32,10 +32,8 @@ jobs:
         run: |
           wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip
           unzip -q connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip -d $HOME
-
           SDK_DIR=$(find $HOME -maxdepth 1 -type d -name "connectiq-sdk-lin-*")
-          echo "SDK_DIR=$SDK_DIR"
-          echo "$SDK_DIR/bin" >> $GITHUB_PATH
+          echo "SDK_DIR=$SDK_DIR" >> $GITHUB_ENV
 
       - name: Restore Garmin developer key
         run: |
@@ -46,7 +44,7 @@ jobs:
       - name: Build IQ package
         run: |
           mkdir -p bin
-          monkeyc \
+          $SDK_DIR/bin/monkeyc \
             -f monkey.jungle \
             -o bin/Stronglifts5x5.iq \
             -y developer_key.der \
