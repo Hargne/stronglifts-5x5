@@ -1,6 +1,15 @@
-# FiveByFive Garmin Connect IQ App
+<div style="text-align:center;margin-bottom:30px">
+  <img src="resources/drawables/launcher_icon.svg" width="100px" height="100px" style="box-shadow:0 0px 24px rgba(0,0,0,0.25);" />
+  
+  <h3>FiveByFive Garmin Connect IQ App</h3>
 
-A Garmin Connect IQ app for tracking 5x5 strength training workouts, inspired by popular barbell programs like StrongLifts.
+  <small>
+    A Garmin Connect IQ app for tracking 5x5 strength training workouts,<br />
+    inspired by popular barbell programs like StrongLifts.
+  </small>
+</div>
+
+---
 
 ### Prerequisites
 
