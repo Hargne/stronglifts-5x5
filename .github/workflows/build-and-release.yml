@@ -31,12 +31,13 @@ jobs:
       - name: Install Connect IQ SDK
         run: |
           wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip -O sdk.zip
-          unzip -q sdk.zip -d $HOME/ciq
+          unzip -q sdk.zip -d $HOME
 
-          REAL_SDK=$(find $HOME/ciq -maxdepth 1 -type d -name "connectiq-sdk-lin-*")
-          echo "REAL_SDK=$REAL_SDK"
-          echo "SDK_DIR=$REAL_SDK" >> $GITHUB_ENV
-          echo "CIQ_SDK_HOME=$REAL_SDK" >> $GITHUB_ENV
+          export CIQ_SDK_HOME="$HOME/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa"
+          echo "CIQ_SDK_HOME=$CIQ_SDK_HOME" >> $GITHUB_ENV
+
+          $CIQ_SDK_HOME/bin/monkeyc --version
+          ls $CIQ_SDK_HOME/Devices | head
 
       - name: Debug SDK
         run: |
@@ -58,7 +59,7 @@ jobs:
       - name: Build IQ package
         run: |
           mkdir -p bin
-          $SDK_DIR/bin/monkeyc \
+          $CIQ_SDK_HOME/bin/monkeyc \
             -f monkey.jungle \
             -o bin/Stronglifts5x5.iq \
             -y developer_key.der \
