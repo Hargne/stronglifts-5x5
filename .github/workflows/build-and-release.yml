@@ -28,16 +28,17 @@ jobs:
         run: |
           sed -i "s/\(<iq:application[^>]*version=\"\)[^\"]*\(\".*\)/\1$VERSION\2/" manifest.xml
 
+      - name: Show manifest.xml
+        run: |
+          echo "---- manifest.xml ----"
+          cat manifest.xml
+          echo "----------------------"
+
       - name: Install Connect IQ SDK
         run: |
-          wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip -O sdk.zip
-          unzip -q sdk.zip -d $HOME
-          echo "CIQ_SDK_HOME=$HOME" >> $GITHUB_ENV
-
-      - name: Debug SDK
-        run: |
-          echo "CIQ_SDK_HOME=$CIQ_SDK_HOME"
-          ls $CIQ_SDK_HOME/Devices | head
+          wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip
+          unzip connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip -d $HOME
+          echo "$HOME/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa/bin" >> $GITHUB_PATH
 
       - name: Restore Garmin developer key
         run: |
@@ -45,16 +46,10 @@ jobs:
         env:
           GARMIN_DEVELOPER_KEY: ${{ secrets.GARMIN_DEVELOPER_KEY }}
 
-      - name: Verify SDK
-        run: |
-          echo "SDK_DIR=$SDK_DIR"
-          ls $SDK_DIR/bin
-          $SDK_DIR/bin/monkeyc --version
-
       - name: Build IQ package
         run: |
           mkdir -p bin
-          $CIQ_SDK_HOME/bin/monkeyc \
+          monkeyc \
             -f monkey.jungle \
             -o bin/Stronglifts5x5.iq \
             -y developer_key.der \
