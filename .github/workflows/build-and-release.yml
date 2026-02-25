@@ -31,8 +31,11 @@ jobs:
       - name: Install Connect IQ SDK
         run: |
           wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip
-          unzip connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip -d $HOME
-          echo "$HOME/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa/bin" >> $GITHUB_PATH
+          unzip -q connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip -d $HOME
+
+          SDK_DIR=$(find $HOME -maxdepth 1 -type d -name "connectiq-sdk-lin-*")
+          echo "SDK_DIR=$SDK_DIR"
+          echo "$SDK_DIR/bin" >> $GITHUB_PATH
 
       - name: Restore Garmin developer key
         run: |
