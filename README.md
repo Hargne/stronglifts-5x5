@@ -21,6 +21,25 @@ monkeyc -f monkey.jungle \
 
 This generates the compiled app in the bin/ directory.
 
+### Build Connect IQ Submission Package (.iq)
+
+Use the helper script to generate a submission-ready `.iq` package:
+
+```bash
+scripts/build-iq-package.sh -s "/path/to/connectiq-sdk"
+```
+
+You can also set the SDK path via environment variable:
+
+```bash
+CONNECTIQ_SDK_HOME="/path/to/connectiq-sdk" scripts/build-iq-package.sh
+```
+
+Optional flags:
+
+- `-k /path/to/key.der` to override signing key (default: `~/.ciq/developer_key.der`)
+- `-o /path/to/output.iq` to override output path (default: `bin/Stronglifts5x5.iq`)
+
 ### Runing in Simulator
 
 #### 1. Start the Simulator
