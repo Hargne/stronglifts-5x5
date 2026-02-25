@@ -7,7 +7,7 @@
         entry="FiveByFiveApp"
         launcherIcon="@Drawables.LauncherIcon"
         minApiLevel="3.2.0"
-        version="0.0.12">
+        version="0.0.13">
         <iq:products>
             <iq:product id="fr245" />
         </iq:products>
