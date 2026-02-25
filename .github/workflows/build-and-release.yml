@@ -33,11 +33,8 @@ jobs:
           wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip -O sdk.zip
           unzip -q sdk.zip -d $HOME
 
-          export CIQ_SDK_HOME="$HOME/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa"
-          echo "CIQ_SDK_HOME=$CIQ_SDK_HOME" >> $GITHUB_ENV
-
-          $CIQ_SDK_HOME/bin/monkeyc --version
-          ls $CIQ_SDK_HOME/Devices | head
+          echo "Listing home directory:"
+          ls -la $HOME
 
       - name: Debug SDK
         run: |
