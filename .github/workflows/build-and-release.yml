@@ -34,6 +34,14 @@ jobs:
           unzip -q sdk.zip -d $HOME/ciq
           echo "SDK_DIR=$HOME/ciq" >> $GITHUB_ENV
 
+      - name: Set CIQ_SDK_HOME
+        run: echo "CIQ_SDK_HOME=$SDK_DIR" >> $GITHUB_ENV
+
+      - name: Debug SDK
+        run: |
+          echo "CIQ_SDK_HOME=$CIQ_SDK_HOME"
+          ls $CIQ_SDK_HOME/Devices | head
+
       - name: Restore Garmin developer key
         run: |
           echo "$GARMIN_DEVELOPER_KEY" | base64 --decode > developer_key.der
