@@ -32,10 +32,11 @@ jobs:
         run: |
           wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip -O sdk.zip
           unzip -q sdk.zip -d $HOME/ciq
-          echo "SDK_DIR=$HOME/ciq" >> $GITHUB_ENV
 
-      - name: Set CIQ_SDK_HOME
-        run: echo "CIQ_SDK_HOME=$SDK_DIR" >> $GITHUB_ENV
+          REAL_SDK=$(find $HOME/ciq -maxdepth 1 -type d -name "connectiq-sdk-lin-*")
+          echo "REAL_SDK=$REAL_SDK"
+          echo "SDK_DIR=$REAL_SDK" >> $GITHUB_ENV
+          echo "CIQ_SDK_HOME=$REAL_SDK" >> $GITHUB_ENV
 
       - name: Debug SDK
         run: |
