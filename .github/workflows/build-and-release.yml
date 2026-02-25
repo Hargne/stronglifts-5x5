@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build-and-attach-to-release:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Checkout tag
@@ -35,10 +35,7 @@ jobs:
           echo "----------------------"
 
       - name: Install Connect IQ SDK
-        run: |
-          wget https://developer.garmin.com/downloads/connect-iq/sdks/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip
-          unzip connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa.zip -d $HOME
-          echo "$HOME/connectiq-sdk-lin-8.4.1-2026-02-03-e9f77eeaa/bin" >> $GITHUB_PATH
+        run: brew install --cask connectiq
 
       - name: Restore Garmin developer key
         run: |
