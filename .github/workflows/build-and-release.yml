@@ -26,7 +26,7 @@ jobs:
 
       - name: Update manifest.xml version
         run: |
-          sed -i "s/\(<iq:application[^>]*version=\"\)[^\"]*\(\".*\)/\1$VERSION\2/" manifest.xml
+          sed -i '' -E "s/^[[:space:]]*version=\"[^\"]*\"/        version=\"$VERSION\"/" manifest.xml
 
       - name: Show manifest.xml
         run: |
