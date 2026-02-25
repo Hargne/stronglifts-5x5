@@ -3,7 +3,7 @@ using Toybox.ActivityRecording;
 using Toybox.Attention;
 using Toybox.System;
 
-module StrongliftsState {
+module FiveByFiveState {
     const INIT = :INIT;
     const SELECT_WORKOUT = :SELECT_WORKOUT;
     const WORKOUT_PREVIEW = :WORKOUT_PREVIEW;
@@ -22,7 +22,7 @@ module StrongliftsState {
     const EXIT = :EXIT;
 }
 
-class StrongliftsStateMachine {
+class FiveByFiveStateMachine {
     const WEIGHT_EDIT_STEP = 2.5;
 
     var _state;
@@ -63,7 +63,7 @@ class StrongliftsStateMachine {
     var _previewScroll;
 
     function initialize() {
-        _profile = StrongliftsStorage.loadProfile();
+        _profile = FiveByFiveStorage.loadProfile();
         _plan = [];
 
         _exerciseIndex = 0;
@@ -95,7 +95,7 @@ class StrongliftsStateMachine {
         _makeupIndex = 0;
         _previewScroll = 0;
 
-        _state = StrongliftsState.INIT;
+        _state = FiveByFiveState.INIT;
         _segmentStartMs = System.getTimer();
         _frozenElapsedMs = null;
 
@@ -105,13 +105,13 @@ class StrongliftsStateMachine {
     function _resolveInitialState() {
         var lastWorkout = _profile[:lastWorkout];
         if (lastWorkout == null) {
-            _transitionTo(StrongliftsState.SELECT_WORKOUT);
+            _transitionTo(FiveByFiveState.SELECT_WORKOUT);
             return;
         }
 
-        _workoutName = StrongliftsWorkoutLogic.getOppositeWorkout(lastWorkout);
+        _workoutName = FiveByFiveWorkoutLogic.getOppositeWorkout(lastWorkout);
         _buildPlanForWorkout();
-        _transitionTo(StrongliftsState.WORKOUT_PREVIEW);
+        _transitionTo(FiveByFiveState.WORKOUT_PREVIEW);
     }
 
     function _transitionTo(nextState) {
@@ -134,7 +134,7 @@ class StrongliftsStateMachine {
     }
 
     function _buildPlanForWorkout() {
-        _plan = StrongliftsWorkoutLogic.getWorkout(_workoutName);
+        _plan = FiveByFiveWorkoutLogic.getWorkout(_workoutName);
         _exerciseIndex = 0;
         _setIndex = 0;
         _previewScroll = 0;
@@ -148,7 +148,7 @@ class StrongliftsStateMachine {
     }
 
     function shouldExit() {
-        return _state == StrongliftsState.EXIT;
+        return _state == FiveByFiveState.EXIT;
     }
 
     function _currentExercise() {
@@ -211,7 +211,7 @@ class StrongliftsStateMachine {
 
         try {
             _activitySession = ActivityRecording.createSession({
-                :name => "Stronglifts 5x5",
+                :name => "FiveByFive",
                 :sport => Activity.SPORT_TRAINING,
                 :subSport => Activity.SUB_SPORT_STRENGTH_TRAINING
             });
@@ -279,13 +279,13 @@ class StrongliftsStateMachine {
     function _saveCompletedSession() {
         _applyProgressionToNextSession();
         _profile[:lastWorkout] = _workoutName;
-        StrongliftsStorage.saveProfile(_profile);
+        FiveByFiveStorage.saveProfile(_profile);
         _stopAndSaveActivity();
     }
 
     function _saveSessionWithoutProgression() {
         _profile[:lastWorkout] = _workoutName;
-        StrongliftsStorage.saveProfile(_profile);
+        FiveByFiveStorage.saveProfile(_profile);
         _stopAndSaveActivity();
     }
 
@@ -322,7 +322,7 @@ class StrongliftsStateMachine {
     }
 
     function _isWorkoutSegmentState(state) {
-        return (state == StrongliftsState.REST || state == StrongliftsState.WORK);
+        return (state == FiveByFiveState.REST || state == FiveByFiveState.WORK);
     }
 
     function _effectiveSettingsBaseState() {
@@ -330,23 +330,23 @@ class StrongliftsStateMachine {
             return _stateBeforeSettings;
         }
         if (_currentExercise() != null) {
-            return StrongliftsState.REST;
+            return FiveByFiveState.REST;
         }
-        return StrongliftsState.SUMMARY;
+        return FiveByFiveState.SUMMARY;
     }
 
     function _skipCurrentSegment() {
-        if (_state == StrongliftsState.WARMUP) {
+        if (_state == FiveByFiveState.WARMUP) {
             _skippedSegments.add({
-                :type => StrongliftsState.WARMUP
+                :type => FiveByFiveState.WARMUP
             });
             _notifySegmentEnd();
             _recordLap();
-            _enterSegment(StrongliftsState.REST);
+            _enterSegment(FiveByFiveState.REST);
             return;
         }
 
-        if (_state == StrongliftsState.REST || _state == StrongliftsState.WORK) {
+        if (_state == FiveByFiveState.REST || _state == FiveByFiveState.WORK) {
             // Skipping in a workout segment skips the entire exercise block (all remaining sets).
             _skippedSegments.add({
                 :type => :EXERCISE,
@@ -359,7 +359,7 @@ class StrongliftsStateMachine {
             if ((_exerciseIndex + 1) < _plan.size()) {
                 _exerciseIndex += 1;
                 _setIndex = 0;
-                _enterSegment(StrongliftsState.REST);
+                _enterSegment(FiveByFiveState.REST);
                 return;
             }
 
@@ -370,7 +370,7 @@ class StrongliftsStateMachine {
     function _gotoEndOrSkippedPrompt() {
         if (_skippedSegments.size() > 0) {
             _skippedPromptCursor = 0;
-            _transitionTo(StrongliftsState.SKIPPED_PROMPT);
+            _transitionTo(FiveByFiveState.SKIPPED_PROMPT);
             return;
         }
 
@@ -378,7 +378,7 @@ class StrongliftsStateMachine {
         if (_summaryElapsedMs < 0) {
             _summaryElapsedMs = 0;
         }
-        _transitionTo(StrongliftsState.SUMMARY);
+        _transitionTo(FiveByFiveState.SUMMARY);
     }
 
     function _startMakeup() {
@@ -388,7 +388,7 @@ class StrongliftsStateMachine {
         }
 
         _makeupIndex = 0;
-        _enterSegment(StrongliftsState.MAKEUP);
+        _enterSegment(FiveByFiveState.MAKEUP);
     }
 
     function _currentMakeupText() {
@@ -398,7 +398,7 @@ class StrongliftsStateMachine {
 
         var item = _skippedSegments[_makeupIndex];
         var t = item[:type];
-        if (t == StrongliftsState.WARMUP) {
+        if (t == FiveByFiveState.WARMUP) {
             return "Warmup";
         }
 
@@ -424,7 +424,7 @@ class StrongliftsStateMachine {
             return;
         }
 
-        _enterSegment(StrongliftsState.MAKEUP);
+        _enterSegment(FiveByFiveState.MAKEUP);
     }
 
     function _formatDuration(ms) {
@@ -451,63 +451,63 @@ class StrongliftsStateMachine {
     function onLap() {
         if (_weightEditOpen) {
             _setCurrentWeight(_weightEditValue);
-            StrongliftsStorage.saveProfile(_profile);
+            FiveByFiveStorage.saveProfile(_profile);
             _weightEditOpen = false;
             return;
         }
 
-        if (_state == StrongliftsState.SELECT_WORKOUT) {
+        if (_state == FiveByFiveState.SELECT_WORKOUT) {
             _workoutName = (_workoutCursor == 0) ? "A" : "B";
             _buildPlanForWorkout();
-            _transitionTo(StrongliftsState.WORKOUT_PREVIEW);
+            _transitionTo(FiveByFiveState.WORKOUT_PREVIEW);
             return;
         }
 
-        if (_state == StrongliftsState.WORKOUT_PREVIEW) {
-            _transitionTo(StrongliftsState.ASK_WARMUP);
+        if (_state == FiveByFiveState.WORKOUT_PREVIEW) {
+            _transitionTo(FiveByFiveState.ASK_WARMUP);
             return;
         }
 
-        if (_state == StrongliftsState.ASK_WARMUP) {
+        if (_state == FiveByFiveState.ASK_WARMUP) {
             _summaryElapsedMs = null;
 
             if (_warmupCursor == 0) {
                 _warmupStarted = false;
-                _transitionTo(StrongliftsState.WARMUP);
+                _transitionTo(FiveByFiveState.WARMUP);
             } else {
                 _startActivitySessionIfNeeded();
                 _sessionStarted = true;
                 _sessionStartMs = System.getTimer();
-                _enterSegment(StrongliftsState.REST);
+                _enterSegment(FiveByFiveState.REST);
             }
             return;
         }
 
-        if (_state == StrongliftsState.WARMUP) {
+        if (_state == FiveByFiveState.WARMUP) {
             if (!_warmupStarted) {
                 _startActivitySessionIfNeeded();
                 _sessionStarted = true;
                 _sessionStartMs = System.getTimer();
                 _warmupStarted = true;
-                _enterSegment(StrongliftsState.WARMUP);
+                _enterSegment(FiveByFiveState.WARMUP);
                 return;
             }
 
             _notifySegmentEnd();
             _recordLap();
             _warmupStarted = false;
-            _enterSegment(StrongliftsState.REST);
+            _enterSegment(FiveByFiveState.REST);
             return;
         }
 
-        if (_state == StrongliftsState.REST) {
+        if (_state == FiveByFiveState.REST) {
             _notifySegmentEnd();
             _recordLap();
-            _enterSegment(StrongliftsState.WORK);
+            _enterSegment(FiveByFiveState.WORK);
             return;
         }
 
-        if (_state == StrongliftsState.WORK) {
+        if (_state == FiveByFiveState.WORK) {
             _notifySegmentEnd();
             _recordLap();
 
@@ -520,17 +520,17 @@ class StrongliftsStateMachine {
             var totalSets = ex[:sets].toNumber();
             if ((_setIndex + 1) < totalSets) {
                 _setIndex += 1;
-                _enterSegment(StrongliftsState.REST);
+                _enterSegment(FiveByFiveState.REST);
                 return;
             }
 
             _freezeElapsed();
             _choiceCursor = 0;
-            _state = StrongliftsState.CHOICE;
+            _state = FiveByFiveState.CHOICE;
             return;
         }
 
-        if (_state == StrongliftsState.CHOICE) {
+        if (_state == FiveByFiveState.CHOICE) {
             var exChoice = _currentExercise();
             if (exChoice != null) {
                 _exerciseEasyMap[exChoice[:name]] = (_choiceCursor == 0);
@@ -539,14 +539,14 @@ class StrongliftsStateMachine {
             if ((_exerciseIndex + 1) < _plan.size()) {
                 _exerciseIndex += 1;
                 _setIndex = 0;
-                _enterSegment(StrongliftsState.REST);
+                _enterSegment(FiveByFiveState.REST);
             } else {
                 _gotoEndOrSkippedPrompt();
             }
             return;
         }
 
-        if (_state == StrongliftsState.SETTINGS) {
+        if (_state == FiveByFiveState.SETTINGS) {
             var baseState = _effectiveSettingsBaseState();
             var options = _settingsOptions();
             if (options.size() == 0) {
@@ -577,18 +577,18 @@ class StrongliftsStateMachine {
             }
 
             if (selected == "Skip segment"
-                || (_settingsCursor == 0 && baseState == StrongliftsState.WARMUP)
+                || (_settingsCursor == 0 && baseState == FiveByFiveState.WARMUP)
                 || (_settingsCursor == 1 && _isWorkoutSegmentState(baseState))) {
                 _state = baseState;
                 _resumeElapsedIfFrozen();
-                if (_isWorkoutSegmentState(baseState) || baseState == StrongliftsState.WARMUP) {
+                if (_isWorkoutSegmentState(baseState) || baseState == FiveByFiveState.WARMUP) {
                     _skipCurrentSegment();
                 }
                 return;
             }
         }
 
-        if (_state == StrongliftsState.EXIT_PROMPT) {
+        if (_state == FiveByFiveState.EXIT_PROMPT) {
             if (_exitPromptCursor == 0) {
                 _state = _stateBeforeExitPrompt;
                 _stateBeforeExitPrompt = null;
@@ -601,16 +601,16 @@ class StrongliftsStateMachine {
 
             if (_exitPromptCursor == 1) {
                 _saveSessionWithoutProgression();
-                _transitionTo(StrongliftsState.EXIT);
+                _transitionTo(FiveByFiveState.EXIT);
                 return;
             }
 
             _stopAndDiscardActivity();
-            _transitionTo(StrongliftsState.EXIT);
+            _transitionTo(FiveByFiveState.EXIT);
             return;
         }
 
-        if (_state == StrongliftsState.SKIPPED_PROMPT) {
+        if (_state == FiveByFiveState.SKIPPED_PROMPT) {
             if (_skippedPromptCursor == 0) {
                 _startMakeup();
                 return;
@@ -620,18 +620,18 @@ class StrongliftsStateMachine {
             if (_summaryElapsedMs < 0) {
                 _summaryElapsedMs = 0;
             }
-            _transitionTo(StrongliftsState.SUMMARY);
+            _transitionTo(FiveByFiveState.SUMMARY);
             return;
         }
 
-        if (_state == StrongliftsState.MAKEUP) {
+        if (_state == FiveByFiveState.MAKEUP) {
             _finishOneMakeup();
             return;
         }
 
-        if (_state == StrongliftsState.SUMMARY) {
+        if (_state == FiveByFiveState.SUMMARY) {
             _saveCompletedSession();
-            _transitionTo(StrongliftsState.EXIT);
+            _transitionTo(FiveByFiveState.EXIT);
             return;
         }
     }
@@ -642,7 +642,7 @@ class StrongliftsStateMachine {
 
         if (_isWorkoutSegmentState(baseState)) {
             options = ["Edit weight", "Skip segment", "Resume"];
-        } else if (baseState == StrongliftsState.WARMUP) {
+        } else if (baseState == FiveByFiveState.WARMUP) {
             options = ["Skip segment", "Resume"];
         }
 
@@ -655,29 +655,29 @@ class StrongliftsStateMachine {
             return;
         }
 
-        if (_state == StrongliftsState.SELECT_WORKOUT) {
+        if (_state == FiveByFiveState.SELECT_WORKOUT) {
             _workoutCursor = (_workoutCursor == 0) ? 1 : 0;
             return;
         }
 
-        if (_state == StrongliftsState.WORKOUT_PREVIEW) {
+        if (_state == FiveByFiveState.WORKOUT_PREVIEW) {
             if (_previewScroll > 0) {
                 _previewScroll -= 1;
             }
             return;
         }
 
-        if (_state == StrongliftsState.ASK_WARMUP) {
+        if (_state == FiveByFiveState.ASK_WARMUP) {
             _warmupCursor = (_warmupCursor == 0) ? 1 : 0;
             return;
         }
 
-        if (_state == StrongliftsState.CHOICE) {
+        if (_state == FiveByFiveState.CHOICE) {
             _choiceCursor = (_choiceCursor == 0) ? 1 : 0;
             return;
         }
 
-        if (_state == StrongliftsState.EXIT_PROMPT) {
+        if (_state == FiveByFiveState.EXIT_PROMPT) {
             if (_exitPromptCursor == 0) {
                 _exitPromptCursor = 2;
             } else {
@@ -686,12 +686,12 @@ class StrongliftsStateMachine {
             return;
         }
 
-        if (_state == StrongliftsState.SKIPPED_PROMPT) {
+        if (_state == FiveByFiveState.SKIPPED_PROMPT) {
             _skippedPromptCursor = (_skippedPromptCursor == 0) ? 1 : 0;
             return;
         }
 
-        if (_state == StrongliftsState.SETTINGS) {
+        if (_state == FiveByFiveState.SETTINGS) {
             var options = _settingsOptions();
             if (options.size() > 0) {
                 if (_settingsCursor == 0) {
@@ -703,10 +703,10 @@ class StrongliftsStateMachine {
             return;
         }
 
-        if (_sessionStarted && _state != StrongliftsState.CLOCK) {
+        if (_sessionStarted && _state != FiveByFiveState.CLOCK) {
             _stateBeforeClock = _state;
             _freezeElapsed();
-            _state = StrongliftsState.CLOCK;
+            _state = FiveByFiveState.CLOCK;
         }
     }
 
@@ -719,7 +719,7 @@ class StrongliftsStateMachine {
             return;
         }
 
-        if (_state == StrongliftsState.CLOCK) {
+        if (_state == FiveByFiveState.CLOCK) {
             if (_stateBeforeClock != null) {
                 _state = _stateBeforeClock;
                 _stateBeforeClock = null;
@@ -731,7 +731,7 @@ class StrongliftsStateMachine {
             return;
         }
 
-        if (_state == StrongliftsState.WORKOUT_PREVIEW) {
+        if (_state == FiveByFiveState.WORKOUT_PREVIEW) {
             var maxScroll = _programPreviewMaxScroll();
             if (_previewScroll < maxScroll) {
                 _previewScroll += 1;
@@ -739,17 +739,17 @@ class StrongliftsStateMachine {
             return;
         }
 
-        if (_state == StrongliftsState.EXIT_PROMPT) {
+        if (_state == FiveByFiveState.EXIT_PROMPT) {
             _exitPromptCursor = (_exitPromptCursor + 1) % 3;
             return;
         }
 
-        if (_state == StrongliftsState.SKIPPED_PROMPT) {
+        if (_state == FiveByFiveState.SKIPPED_PROMPT) {
             _skippedPromptCursor = (_skippedPromptCursor == 0) ? 1 : 0;
             return;
         }
 
-        if (_state == StrongliftsState.SETTINGS) {
+        if (_state == FiveByFiveState.SETTINGS) {
             var options2 = _settingsOptions();
             if (options2.size() > 0) {
                 _settingsCursor = (_settingsCursor + 1) % options2.size();
@@ -757,7 +757,7 @@ class StrongliftsStateMachine {
             return;
         }
 
-        if (_state == StrongliftsState.SELECT_WORKOUT || _state == StrongliftsState.ASK_WARMUP || _state == StrongliftsState.CHOICE) {
+        if (_state == FiveByFiveState.SELECT_WORKOUT || _state == FiveByFiveState.ASK_WARMUP || _state == FiveByFiveState.CHOICE) {
             onUpPress();
         }
     }
@@ -767,7 +767,7 @@ class StrongliftsStateMachine {
             return false;
         }
 
-        if (_state == StrongliftsState.SETTINGS) {
+        if (_state == FiveByFiveState.SETTINGS) {
             _state = _effectiveSettingsBaseState();
             _stateBeforeSettings = null;
             if (_frozenElapsedMs != null) {
@@ -777,7 +777,7 @@ class StrongliftsStateMachine {
             return true;
         }
 
-        if (_state == StrongliftsState.EXIT_PROMPT) {
+        if (_state == FiveByFiveState.EXIT_PROMPT) {
             _state = _stateBeforeExitPrompt;
             _stateBeforeExitPrompt = null;
             if (_frozenElapsedMs != null) {
@@ -791,7 +791,7 @@ class StrongliftsStateMachine {
         _stateBeforeExitPrompt = _state;
         _exitPromptCursor = 0;
         _freezeElapsed();
-        _state = StrongliftsState.EXIT_PROMPT;
+        _state = FiveByFiveState.EXIT_PROMPT;
         return true;
     }
 
@@ -800,16 +800,16 @@ class StrongliftsStateMachine {
             return;
         }
 
-        if (_sessionStarted && (_isWorkoutSegmentState(_state) || _state == StrongliftsState.WARMUP)) {
+        if (_sessionStarted && (_isWorkoutSegmentState(_state) || _state == FiveByFiveState.WARMUP)) {
             _stateBeforeSettings = _state;
             _settingsCursor = 0;
             _freezeElapsed();
-            _state = StrongliftsState.SETTINGS;
+            _state = FiveByFiveState.SETTINGS;
         }
     }
 
     function _formatElapsed() {
-        if (_state == StrongliftsState.CLOCK) {
+        if (_state == FiveByFiveState.CLOCK) {
             return "";
         }
 
@@ -830,27 +830,27 @@ class StrongliftsStateMachine {
     }
 
     function _segmentLabel() {
-        if (_state == StrongliftsState.SELECT_WORKOUT) {
+        if (_state == FiveByFiveState.SELECT_WORKOUT) {
             return "Select Workout";
         }
 
-        if (_state == StrongliftsState.WORKOUT_PREVIEW) {
+        if (_state == FiveByFiveState.WORKOUT_PREVIEW) {
             return "Workout " + _workoutName;
         }
 
-        if (_state == StrongliftsState.ASK_WARMUP) {
+        if (_state == FiveByFiveState.ASK_WARMUP) {
             return "Warmup?";
         }
 
-        if (_state == StrongliftsState.WARMUP) {
+        if (_state == FiveByFiveState.WARMUP) {
             return "Warmup";
         }
 
-        if (_state == StrongliftsState.REST) {
+        if (_state == FiveByFiveState.REST) {
             return "Rest";
         }
 
-        if (_state == StrongliftsState.WORK || _state == StrongliftsState.CHOICE) {
+        if (_state == FiveByFiveState.WORK || _state == FiveByFiveState.CHOICE) {
             var ex = _currentExercise();
             if (ex == null) {
                 return "";
@@ -858,35 +858,35 @@ class StrongliftsStateMachine {
             return ex[:name] + " " + (_setIndex + 1).format("%d") + "/" + ex[:sets].format("%d");
         }
 
-        if (_state == StrongliftsState.SETTINGS) {
+        if (_state == FiveByFiveState.SETTINGS) {
             return "Settings";
         }
 
-        if (_state == StrongliftsState.CLOCK) {
+        if (_state == FiveByFiveState.CLOCK) {
             return "Current Time";
         }
 
-        if (_state == StrongliftsState.EXIT_PROMPT) {
+        if (_state == FiveByFiveState.EXIT_PROMPT) {
             return "End Session";
         }
 
-        if (_state == StrongliftsState.SKIPPED_PROMPT) {
+        if (_state == FiveByFiveState.SKIPPED_PROMPT) {
             return "Skipped Segments";
         }
 
-        if (_state == StrongliftsState.MAKEUP) {
+        if (_state == FiveByFiveState.MAKEUP) {
             return "Makeup";
         }
 
-        if (_state == StrongliftsState.SUMMARY) {
+        if (_state == FiveByFiveState.SUMMARY) {
             return "Workout completed";
         }
 
-        if (_state == StrongliftsState.ACTIVITY_SAVE) {
+        if (_state == FiveByFiveState.ACTIVITY_SAVE) {
             return "Saving...";
         }
 
-        if (_state == StrongliftsState.EXIT) {
+        if (_state == FiveByFiveState.EXIT) {
             return "Saved";
         }
 
@@ -894,7 +894,7 @@ class StrongliftsStateMachine {
     }
 
     function _currentWeightText() {
-        if (_state == StrongliftsState.REST) {
+        if (_state == FiveByFiveState.REST) {
             var exRest = _currentExercise();
             if (exRest == null) {
                 return "";
@@ -902,29 +902,29 @@ class StrongliftsStateMachine {
             return exRest[:name] + " " + (_setIndex + 1).format("%d") + "/" + exRest[:sets].format("%d");
         }
 
-        if (_state == StrongliftsState.WORK || _state == StrongliftsState.CHOICE) {
-            return StrongliftsWorkoutLogic.formatWeightKg(_currentWeight());
+        if (_state == FiveByFiveState.WORK || _state == FiveByFiveState.CHOICE) {
+            return FiveByFiveWorkoutLogic.formatWeightKg(_currentWeight());
         }
         return "";
     }
 
     function _valueLabel() {
-        if (_state == StrongliftsState.REST) {
+        if (_state == FiveByFiveState.REST) {
             return "Next";
         }
 
-        if (_state == StrongliftsState.WORK || _state == StrongliftsState.CHOICE) {
+        if (_state == FiveByFiveState.WORK || _state == FiveByFiveState.CHOICE) {
             return "Weight";
         }
         return "";
     }
 
     function _showValueRow() {
-        return (_state == StrongliftsState.REST || _state == StrongliftsState.WORK || _state == StrongliftsState.CHOICE);
+        return (_state == FiveByFiveState.REST || _state == FiveByFiveState.WORK || _state == FiveByFiveState.CHOICE);
     }
 
     function _showSelectionRow() {
-        return (_state == StrongliftsState.SELECT_WORKOUT || _state == StrongliftsState.ASK_WARMUP);
+        return (_state == FiveByFiveState.SELECT_WORKOUT || _state == FiveByFiveState.ASK_WARMUP);
     }
 
     function _programPreviewLines() {
@@ -941,7 +941,7 @@ class StrongliftsStateMachine {
             if (value == null) {
                 value = 0.0;
             }
-            var formattedWeight = StrongliftsWorkoutLogic.formatWeightKg(value.toFloat());
+            var formattedWeight = FiveByFiveWorkoutLogic.formatWeightKg(value.toFloat());
             lines.add(ex[:sets].format("%d") + "x " + ex[:name] + " (" + formattedWeight + ")");
         }
 
@@ -958,11 +958,11 @@ class StrongliftsStateMachine {
     }
 
     function _selectionOptions() {
-        if (_state == StrongliftsState.SELECT_WORKOUT) {
+        if (_state == FiveByFiveState.SELECT_WORKOUT) {
             return ["A", "B"];
         }
 
-        if (_state == StrongliftsState.ASK_WARMUP) {
+        if (_state == FiveByFiveState.ASK_WARMUP) {
             return ["Yes", "No"];
         }
 
@@ -970,11 +970,11 @@ class StrongliftsStateMachine {
     }
 
     function _selectionCursor() {
-        if (_state == StrongliftsState.SELECT_WORKOUT) {
+        if (_state == FiveByFiveState.SELECT_WORKOUT) {
             return _workoutCursor;
         }
 
-        if (_state == StrongliftsState.ASK_WARMUP) {
+        if (_state == FiveByFiveState.ASK_WARMUP) {
             return _warmupCursor;
         }
 
@@ -982,27 +982,27 @@ class StrongliftsStateMachine {
     }
 
     function _nextText() {
-        if (_state == StrongliftsState.WARMUP) {
+        if (_state == FiveByFiveState.WARMUP) {
             return _warmupStarted ? "LAP to end warmup" : "LAP to start warmup";
         }
 
-        if (_state == StrongliftsState.REST) {
-            return StrongliftsWorkoutLogic.formatWeightKg(_currentWeight());
+        if (_state == FiveByFiveState.REST) {
+            return FiveByFiveWorkoutLogic.formatWeightKg(_currentWeight());
         }
 
-        if (_state == StrongliftsState.CHOICE) {
+        if (_state == FiveByFiveState.CHOICE) {
             return "Set complete";
         }
 
-        if (_state == StrongliftsState.SKIPPED_PROMPT) {
+        if (_state == FiveByFiveState.SKIPPED_PROMPT) {
             return "Perform skipped now?";
         }
 
-        if (_state == StrongliftsState.MAKEUP) {
+        if (_state == FiveByFiveState.MAKEUP) {
             return _currentMakeupText();
         }
 
-        if (_state == StrongliftsState.SUMMARY) {
+        if (_state == FiveByFiveState.SUMMARY) {
             return "Total " + _formatDuration(_summaryElapsedMs);
         }
 
@@ -1011,19 +1011,19 @@ class StrongliftsStateMachine {
 
     function _showNextRow() {
         return (_nextText() != ""
-            && _state != StrongliftsState.WORK
-            && _state != StrongliftsState.CLOCK
-            && _state != StrongliftsState.WORKOUT_PREVIEW);
+            && _state != FiveByFiveState.WORK
+            && _state != FiveByFiveState.CLOCK
+            && _state != FiveByFiveState.WORKOUT_PREVIEW);
     }
 
     function _showNextHeader() {
-        return (_state != StrongliftsState.SELECT_WORKOUT
-            && _state != StrongliftsState.WORKOUT_PREVIEW
-            && _state != StrongliftsState.ASK_WARMUP
-            && _state != StrongliftsState.WARMUP
-            && _state != StrongliftsState.REST
-            && _state != StrongliftsState.SUMMARY
-            && _state != StrongliftsState.SKIPPED_PROMPT);
+        return (_state != FiveByFiveState.SELECT_WORKOUT
+            && _state != FiveByFiveState.WORKOUT_PREVIEW
+            && _state != FiveByFiveState.ASK_WARMUP
+            && _state != FiveByFiveState.WARMUP
+            && _state != FiveByFiveState.REST
+            && _state != FiveByFiveState.SUMMARY
+            && _state != FiveByFiveState.SKIPPED_PROMPT);
     }
 
     function _hintText() {
@@ -1031,30 +1031,30 @@ class StrongliftsStateMachine {
             return "UP/DOWN +/- 2.5, LAP save";
         }
 
-        if (_state == StrongliftsState.SELECT_WORKOUT || _state == StrongliftsState.ASK_WARMUP) {
+        if (_state == FiveByFiveState.SELECT_WORKOUT || _state == FiveByFiveState.ASK_WARMUP) {
             return "LAP confirm option";
         }
 
-        if (_state == StrongliftsState.WORKOUT_PREVIEW) {
+        if (_state == FiveByFiveState.WORKOUT_PREVIEW) {
             return "UP/DOWN scroll, LAP continue";
         }
 
-        if (_state == StrongliftsState.REST || _state == StrongliftsState.WORK || _state == StrongliftsState.WARMUP) {
+        if (_state == FiveByFiveState.REST || _state == FiveByFiveState.WORK || _state == FiveByFiveState.WARMUP) {
             return "Hold UP for settings";
         }
 
-        if (_state == StrongliftsState.CLOCK) {
+        if (_state == FiveByFiveState.CLOCK) {
             return "DOWN return";
         }
 
-        if (_state == StrongliftsState.CHOICE
-            || _state == StrongliftsState.SETTINGS
-            || _state == StrongliftsState.EXIT_PROMPT
-            || _state == StrongliftsState.SKIPPED_PROMPT) {
+        if (_state == FiveByFiveState.CHOICE
+            || _state == FiveByFiveState.SETTINGS
+            || _state == FiveByFiveState.EXIT_PROMPT
+            || _state == FiveByFiveState.SKIPPED_PROMPT) {
             return "LAP confirm option";
         }
 
-        if (_state == StrongliftsState.SUMMARY) {
+        if (_state == FiveByFiveState.SUMMARY) {
             return "LAP save activity";
         }
 
@@ -1066,19 +1066,19 @@ class StrongliftsStateMachine {
             return "Edit Weight";
         }
 
-        if (_state == StrongliftsState.CHOICE) {
+        if (_state == FiveByFiveState.CHOICE) {
             return "Perceived Effort";
         }
 
-        if (_state == StrongliftsState.SETTINGS) {
+        if (_state == FiveByFiveState.SETTINGS) {
             return "Settings";
         }
 
-        if (_state == StrongliftsState.EXIT_PROMPT) {
+        if (_state == FiveByFiveState.EXIT_PROMPT) {
             return "Session Options";
         }
 
-        if (_state == StrongliftsState.SKIPPED_PROMPT) {
+        if (_state == FiveByFiveState.SKIPPED_PROMPT) {
             return "Skipped Segments";
         }
 
@@ -1087,22 +1087,22 @@ class StrongliftsStateMachine {
 
     function _overlayOptions() {
         if (_weightEditOpen) {
-            return [StrongliftsWorkoutLogic.formatWeightKg(_weightEditValue)];
+            return [FiveByFiveWorkoutLogic.formatWeightKg(_weightEditValue)];
         }
 
-        if (_state == StrongliftsState.CHOICE) {
+        if (_state == FiveByFiveState.CHOICE) {
             return ["Easy", "Hard"];
         }
 
-        if (_state == StrongliftsState.SETTINGS) {
+        if (_state == FiveByFiveState.SETTINGS) {
             return _settingsOptions();
         }
 
-        if (_state == StrongliftsState.EXIT_PROMPT) {
+        if (_state == FiveByFiveState.EXIT_PROMPT) {
             return ["Resume", "Save", "Delete"];
         }
 
-        if (_state == StrongliftsState.SKIPPED_PROMPT) {
+        if (_state == FiveByFiveState.SKIPPED_PROMPT) {
             return ["Do skipped", "Finish now"];
         }
 
@@ -1110,19 +1110,19 @@ class StrongliftsStateMachine {
     }
 
     function _overlayCursor() {
-        if (_state == StrongliftsState.CHOICE) {
+        if (_state == FiveByFiveState.CHOICE) {
             return _choiceCursor;
         }
 
-        if (_state == StrongliftsState.SETTINGS) {
+        if (_state == FiveByFiveState.SETTINGS) {
             return _settingsCursor;
         }
 
-        if (_state == StrongliftsState.EXIT_PROMPT) {
+        if (_state == FiveByFiveState.EXIT_PROMPT) {
             return _exitPromptCursor;
         }
 
-        if (_state == StrongliftsState.SKIPPED_PROMPT) {
+        if (_state == FiveByFiveState.SKIPPED_PROMPT) {
             return _skippedPromptCursor;
         }
 
@@ -1131,40 +1131,40 @@ class StrongliftsStateMachine {
 
     function isOverlayVisible() {
         return _weightEditOpen
-            || (_state == StrongliftsState.CHOICE)
-            || (_state == StrongliftsState.EXIT_PROMPT)
-            || (_state == StrongliftsState.SKIPPED_PROMPT);
+            || (_state == FiveByFiveState.CHOICE)
+            || (_state == FiveByFiveState.EXIT_PROMPT)
+            || (_state == FiveByFiveState.SKIPPED_PROMPT);
     }
 
     function getDisplayModel() {
         return {
             :segment => _segmentLabel(),
             :elapsed => _formatElapsed(),
-            :showElapsed => (_state != StrongliftsState.SELECT_WORKOUT
-                && _state != StrongliftsState.WORKOUT_PREVIEW
-                && _state != StrongliftsState.ASK_WARMUP
-                && (_state != StrongliftsState.WARMUP || _warmupStarted)
-                && _state != StrongliftsState.SUMMARY
-                && _state != StrongliftsState.CLOCK),
+            :showElapsed => (_state != FiveByFiveState.SELECT_WORKOUT
+                && _state != FiveByFiveState.WORKOUT_PREVIEW
+                && _state != FiveByFiveState.ASK_WARMUP
+                && (_state != FiveByFiveState.WARMUP || _warmupStarted)
+                && _state != FiveByFiveState.SUMMARY
+                && _state != FiveByFiveState.CLOCK),
             :showValue => _showValueRow(),
             :valueLabel => _valueLabel(),
             :weight => _currentWeightText(),
             :showSelection => _showSelectionRow(),
             :selectionOptions => _selectionOptions(),
             :selectionCursor => _selectionCursor(),
-            :showProgramPreview => (_state == StrongliftsState.WORKOUT_PREVIEW),
+            :showProgramPreview => (_state == FiveByFiveState.WORKOUT_PREVIEW),
             :programPreviewLines => _programPreviewLines(),
             :programPreviewScroll => _previewScroll,
             :showNext => _showNextRow(),
             :showNextHeader => _showNextHeader(),
             :next => _nextText(),
-            :isWorkOrRest => (_state == StrongliftsState.WORK
-                || _state == StrongliftsState.REST
-                || _state == StrongliftsState.CHOICE),
-            :isSummary => (_state == StrongliftsState.SUMMARY),
-            :showClock => (_state == StrongliftsState.CLOCK),
+            :isWorkOrRest => (_state == FiveByFiveState.WORK
+                || _state == FiveByFiveState.REST
+                || _state == FiveByFiveState.CHOICE),
+            :isSummary => (_state == FiveByFiveState.SUMMARY),
+            :showClock => (_state == FiveByFiveState.CLOCK),
             :clockText => _clockText(),
-            :showSettings => (_state == StrongliftsState.SETTINGS),
+            :showSettings => (_state == FiveByFiveState.SETTINGS),
             :settingsOptions => _settingsOptions(),
             :settingsCursor => _settingsCursor,
             :hint => _hintText(),

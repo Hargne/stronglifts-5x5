@@ -31,9 +31,36 @@ jobs:
           sed -i -E "s/^[[:space:]]*version=\"[^\"]*\"/        version=\"$VERSION\"/" manifest.xml
 
       - name: Setup Connect IQ SDK
-        uses: garmin/connectiq-sdk-setup@v1
-        with:
-          version: "8.4.1"
+        env:
+          SDK_VERSION: "8.4.1"
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/connectiq"
+          cd "$RUNNER_TEMP/connectiq"
+
+          curl -fsSL "https://developer.garmin.com/downloads/connect-iq/sdks/sdks.json" -o sdks.json
+
+          SDK_NAME="$(tr ',' '\n' < sdks.json \
+            | sed -nE 's/.*"(connectiq-sdk-lin-[^"]+)".*/\1/p' \
+            | grep "^connectiq-sdk-lin-${SDK_VERSION}" \
+            | head -n1)"
+
+          if [ -z "${SDK_NAME:-}" ]; then
+            echo "Unable to resolve Linux Connect IQ SDK for version ${SDK_VERSION}" >&2
+            exit 1
+          fi
+
+          curl -fsSL "https://developer.garmin.com/downloads/connect-iq/sdks/${SDK_NAME}.zip" -o sdk.zip
+          unzip -q sdk.zip -d .
+
+          SDK_HOME="$RUNNER_TEMP/connectiq/${SDK_NAME}"
+          if [ ! -x "$SDK_HOME/bin/monkeyc" ]; then
+            echo "monkeyc not found at $SDK_HOME/bin/monkeyc" >&2
+            exit 1
+          fi
+
+          echo "CONNECTIQ_SDK_HOME=$SDK_HOME" >> "$GITHUB_ENV"
+          echo "$SDK_HOME/bin" >> "$GITHUB_PATH"
 
       - name: Restore Garmin developer key
         run: |
@@ -44,11 +71,10 @@ jobs:
       - name: Build IQ package via script
         run: |
           chmod +x scripts/build-iq-package.sh
-          SDK_HOME="$(cd "$(dirname "$(command -v monkeyc)")/.." && pwd)"
           CONNECTIQ_KEY_PATH="$PWD/developer_key.der" \
-          scripts/build-iq-package.sh -s "$SDK_HOME"
+          scripts/build-iq-package.sh -s "$CONNECTIQ_SDK_HOME"
 
       - name: Attach IQ to release
         uses: softprops/action-gh-release@v2
         with:
-          files: bin/Stronglifts5x5.iq
+          files: bin/FiveByFive.iq

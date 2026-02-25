@@ -1,7 +1,7 @@
 using Toybox.Application;
 using Toybox.WatchUi;
 
-class Stronglifts5x5App extends Application.AppBase {
+class FiveByFiveApp extends Application.AppBase {
 
     function initialize() {
         AppBase.initialize();
@@ -14,8 +14,8 @@ class Stronglifts5x5App extends Application.AppBase {
     }
 
     function getInitialView() {
-        var view = new StrongliftsMainView();
-        var input = new StrongliftsInputDelegate(view);
+        var view = new FiveByFiveMainView();
+        var input = new FiveByFiveInputDelegate(view);
         return [view, input];
     }
 }

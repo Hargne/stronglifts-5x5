@@ -1,6 +1,6 @@
-# StrongLifts 5x5 Garmin Connect IQ App
+# FiveByFive Garmin Connect IQ App
 
-A Garmin Connect IQ app implementing the StrongLifts 5x5 workout program.
+A Garmin Connect IQ app for tracking 5x5 strength training workouts, inspired by popular barbell programs like StrongLifts.
 
 ### Prerequisites
 
@@ -15,7 +15,7 @@ From the project root:
 
 ```bash
 monkeyc -f monkey.jungle \
-  -o bin/Stronglifts5x5.prg \
+  -o bin/FiveByFive.prg \
   -y /path/to/developer_key.der
 ```
 
@@ -38,7 +38,7 @@ CONNECTIQ_SDK_HOME="/path/to/connectiq-sdk" scripts/build-iq-package.sh
 Optional flags:
 
 - `-k /path/to/key.der` to override signing key (default: `~/.ciq/developer_key.der`)
-- `-o /path/to/output.iq` to override output path (default: `bin/Stronglifts5x5.iq`)
+- `-o /path/to/output.iq` to override output path (default: `bin/FiveByFive.iq`)
 
 ### Runing in Simulator
 
@@ -57,7 +57,7 @@ Otherwise, run the `simulator` binary from your Connect IQ SDK installation dire
 In a separate terminal
 
 ```bash
-monkeydo bin/Stronglifts5x5.prg <device-id>
+monkeydo bin/FiveByFive.prg <device-id>
 ```
 
 Replace `<device-id>` with your target device (for example: `fr245`).
@@ -71,7 +71,7 @@ Replace `<device-id>` with your target device (for example: `fr245`).
 Example:
 
 ```bash
-cp bin/Stronglifts5x5.prg /Volumes/GARMIN/GARMIN/APPS/
+cp bin/FiveByFive.prg /Volumes/GARMIN/GARMIN/APPS/
 ```
 
 4. Safely eject the device.

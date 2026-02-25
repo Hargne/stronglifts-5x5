@@ -1,8 +1,9 @@
 using Toybox.Application;
 using Toybox.Lang as Lang;
 
-module StrongliftsStorage {
-    const PROFILE_KEY = "stronglifts_5x5_profile_v1";
+module FiveByFiveStorage {
+    const PROFILE_KEY = "five_by_five_profile_v1";
+    const LEGACY_PROFILE_KEY = "stronglifts_5x5_profile_v1";
 
     function _defaultWeights() {
         return {
@@ -24,6 +25,10 @@ module StrongliftsStorage {
     function loadProfile() {
         var profile = defaultProfile();
         var saved = Application.Storage.getValue(PROFILE_KEY);
+        if (!(saved instanceof Lang.Dictionary)) {
+            // Backward compatibility: preserve existing user data from the old app key.
+            saved = Application.Storage.getValue(LEGACY_PROFILE_KEY);
+        }
 
         if (!(saved instanceof Lang.Dictionary)) {
             return profile;

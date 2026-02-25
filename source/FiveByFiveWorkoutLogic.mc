@@ -1,4 +1,4 @@
-module StrongliftsWorkoutLogic {
+module FiveByFiveWorkoutLogic {
     const WORKOUT_A = [
         { :name => "Squat", :sets => 5, :increment => 2.5 },
         { :name => "Bench Press", :sets => 5, :increment => 2.5 },

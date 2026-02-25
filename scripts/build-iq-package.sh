@@ -9,7 +9,7 @@ if [[ -n "$SDK_HOME" ]]; then
   MONKEYC="${SDK_HOME}/bin/monkeyc"
 fi
 KEY_PATH="${CONNECTIQ_KEY_PATH:-$HOME/.ciq/developer_key.der}"
-OUTPUT_PATH="${ROOT_DIR}/bin/Stronglifts5x5.iq"
+OUTPUT_PATH="${ROOT_DIR}/bin/FiveByFive.iq"
 
 usage() {
   cat <<'EOF'
@@ -20,7 +20,7 @@ Usage:
 
 Options:
   -k  Path to developer/distribution key (.der)
-  -o  Output .iq path (default: bin/Stronglifts5x5.iq)
+  -o  Output .iq path (default: bin/FiveByFive.iq)
   -s  Connect IQ SDK home path (required unless CONNECTIQ_SDK_HOME is set)
   -h  Show this help
 

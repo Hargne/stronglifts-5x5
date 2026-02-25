@@ -2,13 +2,13 @@ using Toybox.Graphics;
 using Toybox.Timer;
 using Toybox.WatchUi;
 
-class StrongliftsMainView extends WatchUi.View {
+class FiveByFiveMainView extends WatchUi.View {
     var _machine;
     var _timer;
 
     function initialize() {
         View.initialize();
-        _machine = new StrongliftsStateMachine();
+        _machine = new FiveByFiveStateMachine();
         _timer = new Timer.Timer();
     }
 

@@ -1,7 +1,7 @@
 using Toybox.System;
 using Toybox.WatchUi;
 
-class StrongliftsInputDelegate extends WatchUi.InputDelegate {
+class FiveByFiveInputDelegate extends WatchUi.InputDelegate {
     const HOLD_MS = 700;
 
     var _view;
