@@ -1036,7 +1036,7 @@ class FiveByFiveStateMachine {
         }
 
         if (_state == FiveByFiveState.WORKOUT_PREVIEW) {
-            return "UP/DOWN scroll, LAP continue";
+            return "LAP to continue";
         }
 
         if (_state == FiveByFiveState.REST || _state == FiveByFiveState.WORK || _state == FiveByFiveState.WARMUP) {
