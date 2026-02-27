@@ -101,7 +101,8 @@ class FiveByFiveMainView extends WatchUi.View {
             var previewLines = model[:programPreviewLines];
             var previewOffset = model[:programPreviewScroll].toNumber();
             var previewStartY = (68 * yScale).toNumber() + centerShift;
-            var previewLineStep = (20 * yScale).toNumber();
+            var previewItemGap = (4 * yScale).toNumber();
+            var previewLineStep = (20 * yScale).toNumber() + previewItemGap;
             var maxVisible = 3;
             for (var pi = 0; pi < maxVisible; pi += 1) {
                 var idx = previewOffset + pi;
